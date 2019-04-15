@@ -15,7 +15,7 @@
             
             test@testmachine:~/test/repodir$ cd nyctaxiserver
             test@testmachine:~/test/repodir/nyctaxiserver$ source envsetup.sh
-            (venvtaxiapi) test@testmachine:~/test/repodir/nyctaxiserver$ python run.py
+            (venvtaxiapi) test@testmachine:~/test/repodir/nyctaxiserver$ python runserver.py
                     
         -- Windows: 
 
@@ -23,7 +23,7 @@
 
     
 
-   b. In case there are isses with running above file you may *install/configure* a virtual environment as follows
+   b. In case there are isses with running above file you may *install/configure* a virtual environment by running commands as follows
     
         -- Linux 
             
@@ -32,7 +32,7 @@
             test@testmachine:~/test/repodir/nyctaxiserver$ python3 -m virtualenv venvtaxiapi
             test@testmachine:~/test/repodir/nyctaxiserver$ source venvtaxiapi/bin/activate
             (venvtaxiapi) test@testmachine:~/test/repodir/nyctaxiserver$ python -m pip install -r requirements.txt
-            (venvtaxiapi) test@testmachine:~/test/repodir/nyctaxiserver$ python run.py
+            (venvtaxiapi) test@testmachine:~/test/repodir/nyctaxiserver$ python runserver.py
 
         -- Windows:
             
@@ -47,7 +47,7 @@
             
             test@testmachine:~/test/repodir$ cd nyctaxiserver
             test@testmachine:~/test/repodir/nyctaxiserver$ source venvtaxiapi/bin/activate/
-            (venvtaxiapi) test@testmachine:~/testdir/repodir$ python run.py
+            (venvtaxiapi) test@testmachine:~/testdir/repodir$ python runserver.py
                     
         -- Windows  : 
 
