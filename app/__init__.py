@@ -1,5 +1,6 @@
 from flask_restplus import Api, fields
 from app.main.resources.totaltrips_by_date import totaltrips_by_date_ns
+from app.main.resources.avgfare_by_s2id import avgfare_by_s2id_ns
 
 from app.configuration.config import config_by_envkey
 from flask import Flask, Blueprint
@@ -20,6 +21,7 @@ class APIServer:
                       )
         #self.app.register_blueprint(self.blueprint)        
         self.api.add_namespace(totaltrips_by_date_ns,'/total_trips')
+        self.api.add_namespace(avgfare_by_s2id_ns,'/average_fare_heatmap')
 
 
     def run(self):
