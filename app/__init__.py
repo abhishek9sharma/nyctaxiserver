@@ -1,5 +1,6 @@
 from flask_restplus import Api, fields
-from app.main.resources.tripcounts import tripcounts_ns as total_trips
+from app.main.resources.totaltrips_by_date import totaltrips_by_date_ns
+
 from app.configuration.config import config_by_envkey
 from flask import Flask, Blueprint
 
@@ -18,7 +19,7 @@ class APIServer:
                         description= "A Web API for returning statistics related to trips made by new york taxis"
                       )
         #self.app.register_blueprint(self.blueprint)        
-        self.api.add_namespace(total_trips,'/total_trips')
+        self.api.add_namespace(totaltrips_by_date_ns,'/total_trips')
 
 
     def run(self):

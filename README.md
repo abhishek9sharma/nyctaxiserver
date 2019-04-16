@@ -1,7 +1,7 @@
 # nyctaxiserver
  
  # Description
- A python based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data
+  A python (flask-restplus) based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data
 
 ## Steps to run
 ### All commands may require sudo/admin privileges
