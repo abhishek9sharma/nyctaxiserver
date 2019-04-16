@@ -5,7 +5,7 @@ class TripCountsPerDay:
     ns = Namespace('total_trips', 'Number of trips in a given date range')
     total_trips = ns.model('total_trips', {
                                                            'date': fields.Date(required = True, description = 'date'),
-                                                           'total_trips': fields.Integer(reuired= True, description = 'number of trips on a given date')
+                                                           'total_trips': fields.Integer(required= True, description = 'number of trips on a given date')
                                                           
                                                           })
     parser = reqparse.RequestParser(bundle_errors= True)

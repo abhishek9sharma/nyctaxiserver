@@ -16,7 +16,7 @@ class DevelopmentConfig(BaseConfig):
 
 class TestingConfig(BaseConfig):
     """A class used to store coniguration properties related to staging environment"""
-    DEBUG = False
+    DEBUG = True
     TESTING = True
     SERVER_NAME="localhost:5000"
 
