@@ -1,7 +1,9 @@
 from flask_restplus import Namespace, fields, reqparse
 
 class AvgFareByS2ID:
-    """ Schema for Trips per date """
+   
+    """ Schema for Average Fare for a S2ID """
+   
     ns = Namespace('avg_fare_by_s2id', 'Average Fare Per Pick Up Location (S2ID) for Level 16')
     model = ns.model('avg_fare_by_s2id', {
                                                            's2id': fields.String(required = True, description = 's2id of location at level 16'),

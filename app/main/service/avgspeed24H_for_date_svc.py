@@ -1,9 +1,9 @@
 from app.main.service.baseservice import BaseServiceManager
 
-class AvgFareByS2IDServiceManager(BaseServiceManager):
+class AvgFare24HForDateServiceManager(BaseServiceManager):
 
     def __init__(self):
-        self.avg_speed_24hours_for_date = None
+        self.avg_fare_by_s2id = None
 
     
     def get_data(self, input_date, dbconfig):
@@ -19,15 +19,15 @@ class AvgFareByS2IDServiceManager(BaseServiceManager):
 
         # query = """
         #         SELECT  * from
-        #         FROM `taxiinfo.speed_table`
+        #         FROM `taxiinfo.fare_table`
         #         where date = @input_date
         #         """
         #avg_fare_by_date_df = self.fetch_records_from_BQ(query, dbconfig, queryparams)
         #self.vg_fare_by_s2id = eval(totaltrips_by_date_df.to_json(orient ='records'))
-        self.avg_speed_24hours_for_date = self.compute_avg_speed_24hours_for_date()
-        return self.avg_speed_24hours_for_date
+        self.avg_fare_by_s2id = self.compute_avg_fare_by_s2id()
+        return self.avg_fare_by_s2id
 
 
-    def compute_avg_speed_24hours_for_date(self):
-        return [{"average_speed": 24.7}]
+    def compute_avg_fare_by_s2id(self):
+        return [{"s2id": "951977d37", "fare": 13.21}, {"s2id": "951977d40", "fare": 5.43}]
 

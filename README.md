@@ -53,4 +53,16 @@
 
             C:/../testdir...
 
-4. TBC ...
+4. **Run Tests**  : In order to execute the testcases run the following command from shell. Before this please make sure to perform Step 2 if not done already.
+
+        -- Linux:   
+            
+            test@testmachine:~/test/repodir$ cd nyctaxiserver
+            test@testmachine:~/test/repodir/nyctaxiserver$ source venvtaxiapi/bin/activate/
+            (venvtaxiapi) test@testmachine:~/testdir/repodir$ pytest
+                    
+        -- Windows  : 
+
+            C:/../testdir...
+
+5. Logs ...<TBC>

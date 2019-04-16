@@ -21,7 +21,7 @@ class AvgFareByS2IDList(Resource):
     """ 
 
     @avgfare_by_s2id_ns.expect(avgfare_by_s2id_parser, validate = True)
-    @avgfare_by_s2id_ns.marshal_with(avgfare_by_s2id_model, envelope = 'data')
+    @avgfare_by_s2id_ns.marshal_list_with(avgfare_by_s2id_model, envelope = 'data')
     def get(self):
         
         query_string_data = avgfare_by_s2id_parser.parse_args(request)

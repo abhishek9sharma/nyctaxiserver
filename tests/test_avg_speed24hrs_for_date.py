@@ -3,7 +3,7 @@ from app import APIServer
 import requests
 import json
 
-class AvgFareByS2IDTestCase(unittest.TestCase):
+class AvgSpeed24HForDateTestCase(unittest.TestCase):
 
     def setUp(self):
         self.testserver = APIServer('testing')
@@ -15,7 +15,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date (integer) returns a  400 error response."""
         
         query_string_param1 = 'date=1'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 1, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -25,7 +25,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date (string) returns a  400 error response."""
         
         query_string_param1 = 'date=2017/01/01'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017/01/01, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -35,7 +35,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date YYYY-MM-D returns a  400 error response."""
      
         query_string_param1 = 'date=2017-01-1'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017-01-1, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
  
@@ -45,7 +45,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date YYYY-M-DD returns a  400 error response"""
         
         query_string_param1 = 'date=2017-1-11'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017-1-11, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -54,7 +54,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date YYYY-MM-DD (DD>31) returns a  400 error response"""
         
         query_string_param1 = 'date=2017-01-32'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017-01-32, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -63,7 +63,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date YYYY-MM-DD (MM>12) returns a  400 error response"""
         
         query_string_param1 = 'date=2017-13-31'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017-13-31, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -72,7 +72,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
         """Test for invalid date YYYY-MM-DD (wrong date month combination) returns a  400 error response"""
         
         query_string_param1 = 'date=2017-02-30'
-        response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid format for date parameter having value --> 2017-02-30, expected format is YYYY-MM-DD"}
         assert response.status_code == 400
 
@@ -83,20 +83,11 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
 #         """Test for valid dates returns a  200  response."""
         
 #         query_string_param1 = 'date=2017-01-01'
-#         response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+#         response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
 #         assert json.loads(response.data.decode('utf-8')) == {
 #                                                 "data": [
 #                                                     {
-#                                                     "s2id": "2017-01-01",
-#                                                     "fare": 322201
-#                                                     },
-#                                                     {
-#                                                     "s2id": "2017-01-02",
-#                                                     "fare": 249419
-#                                                     },
-#                                                     {
-#                                                     "s2id": "2017-01-03",
-#                                                     "fare": 309032
+#                                                     "average_speed": "24.7",
 #                                                     }
 #                                                 ]
 #                                             }
@@ -110,7 +101,7 @@ class AvgFareByS2IDTestCase(unittest.TestCase):
 #         """Test for valid dates both dates not present in table returns a  200  response."""
         
 #         query_string_param1 = 'date=2019-04-01'
-#         response = self.client().get('/average_fare_heatmap/?' +  query_string_param1)
+#         response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
 #         assert json.loads(response.data.decode('utf-8')) == {"message": "No records found for the given date: 2019-04-01"}
 #         assert response.status_code == 404
 
