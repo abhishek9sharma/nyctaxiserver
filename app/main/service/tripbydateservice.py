@@ -6,18 +6,27 @@ class TotalTripsServiceManager(BaseServiceManager):
         self.trips_by_dates = []
 
     
-    def get_data(self, start_date, end_date):
+    def get_data(self, start_date, end_date, dbconfig):
         
         """Gets the counts of trips grouped by date based on the provided date range """
-        
-        dummy_data = [
-                        {"date":"2018-01-01","total_trips":"23294"},
-                        {"date":"2018-01-02","total_trips":"23222"},
-                        {"date":"2018-01-03","total_trips":"26417"},
-                        {"date":"2018-01-04","total_trips":"6519"}
-                    ]
-        
-        return dummy_data
 
+
+        temp_locals = locals().copy()
+        queryparams = {}
+        for pargkey in temp_locals.keys():
+            if pargkey not in ['self', 'dbconfig']:
+                queryparams[pargkey] = temp_locals[pargkey]
+
+        #queryparams = [ parg for parg in locals()  if parg not in ['self', 'dbconfig']]
+        query = """
+                SELECT  date,sum(total_trips) as total_trips
+                FROM `gh2nu-904.taxiinfo.total_trips_per_day`
+                where date >=@start_date and date <=@end_date
+                group by date
+                order by date
+                """
+
+        results_dataframe = self.fetch_records_from_BQ(query, dbconfig, queryparams)
+        return eval(results_dataframe.to_json(orient ='records'))
 
 

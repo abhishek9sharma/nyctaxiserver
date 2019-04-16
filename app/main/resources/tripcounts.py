@@ -39,11 +39,12 @@ class TripCountsPerDayList(Resource):
             abort(400, 'Invalid DATE RANGE, start date : ' + str(start_date) + ' should be less than end date: ' + str(end_date))
         
         tripdataservice = TotalTripsServiceManager()
-        tripcounts_list = tripdataservice.get_data(start_date, end_date)
+        tripcounts_list = tripdataservice.get_data(start_date, end_date, self.api.app.config.get('BQCONFIGFILE'))
+        print(tripcounts_list)
         if tripcounts_list:
             return tripcounts_list
         
         #return {'NotFOund': 'No trips found for the given date range'}, 404 
-        abort(404, 'NotFound : No trips found for the given date range')
+        abort(404, 'No records found for the given date range : '  + str(start_date) + " --> " + str(end_date))
  
  

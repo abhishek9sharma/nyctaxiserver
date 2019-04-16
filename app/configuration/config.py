@@ -1,4 +1,5 @@
 import  os
+#from app.main.utils.big_query_helper import BQConnector
 
 configdir = os.path.abspath(os.path.dirname(__file__))
 
@@ -7,6 +8,9 @@ class BaseConfig(object):
     DEBUG = True
     TESTING = False
     SERVER_NAME="localhost:8080"
+    BQCONFIGFILE = os.path.join(configdir, 'bqconfig.json', )
+    ERROR_404_HELP = False
+    #BQCONNECTION = BQConnector(BQCONFIGFILE)
 
 
 class DevelopmentConfig(BaseConfig):

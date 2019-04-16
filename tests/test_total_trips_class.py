@@ -183,81 +183,81 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         assert json.loads(response.data.decode('utf-8')) == {"message": "Invalid DATE RANGE, start date : 2017-01-02 should be less than end date: 2017-01-01"}
         assert response.status_code == 400
 
-    # #tests for start date equal to end date
-    # def test_valid_request_both_dates_equal(self):
+    #tests for start date equal to end date
+    def test_valid_request_both_dates_equal(self):
         
-    #     """Test for valid dates (both dates as are same) returns a  200 response."""
+        """Test for valid dates (both dates as are same) returns a  200 response."""
         
-    #     query_string_param1 = 'start=2017-01-01'
-    #     query_string_param2 = 'end=2017-01-01'
-    #     response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-    #     assert json.loads(response.data.decode('utf-8')) == {"data": [
-    #                                                    {
-    #                                                     "date": "2017-01-01",
-    #                                                     "total_trips": 322201
-    #                                                    }
-    #                                                 ]
-    #                                         }
-    #     assert response.status_code == 200
+        query_string_param1 = 'start=2017-01-01'
+        query_string_param2 = 'end=2017-01-01'
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == {"data": [
+                                                       {
+                                                        "date": "2017-01-01",
+                                                        "total_trips": 322201
+                                                       }
+                                                    ]
+                                            }
+        assert response.status_code == 200
 
-    # #tests for valid start and end date
-    # def test_valid_request_both_dates(self):
+    #tests for valid start and end date
+    def test_valid_request_both_dates(self):
         
-    #     """Test for valid dates returns a  200  response."""
+        """Test for valid dates returns a  200  response."""
         
-    #     query_string_param1 = 'start=2017-01-01'
-    #     query_string_param2 = 'end=2017-01-03'
-    #     response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-    #     assert json.loads(response.data.decode('utf-8')) == {
-    #                                             "data": [
-    #                                                 {
-    #                                                 "date": "2017-01-01",
-    #                                                 "total_trips": 322201
-    #                                                 },
-    #                                                 {
-    #                                                 "date": "2017-01-02",
-    #                                                 "total_trips": 249419
-    #                                                 },
-    #                                                 {
-    #                                                 "date": "2017-01-03",
-    #                                                 "total_trips": 309032
-    #                                                 }
-    #                                             ]
-    #                                         }
-    #     assert response.status_code == 200
+        query_string_param1 = 'start=2017-01-01'
+        query_string_param2 = 'end=2017-01-03'
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == {
+                                                "data": [
+                                                    {
+                                                    "date": "2017-01-01",
+                                                    "total_trips": 322201
+                                                    },
+                                                    {
+                                                    "date": "2017-01-02",
+                                                    "total_trips": 249419
+                                                    },
+                                                    {
+                                                    "date": "2017-01-03",
+                                                    "total_trips": 309032
+                                                    }
+                                                ]
+                                            }
+        assert response.status_code == 200
 
-    # #tests for valid start and end date
-    # def test_valid_request_both_dates_end_date_not_present(self):
+    #tests for valid start and end date
+    def test_valid_request_both_dates_end_date_not_present(self):
         
-    #     """Test for valid dates end date not present in table returns a  200  response."""
+        """Test for valid dates end date not present in table returns a  200  response."""
         
-    #     query_string_param1 = 'start=2018-04-30'
-    #     query_string_param2 = 'end=2019-01-03'
-    #     response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-    #     assert json.loads(response.data.decode('utf-8')) == {"data":[
-    #                                                     {
-    #                                                         "date": "2018-04-30",
-    #                                                         "total_trips": 4
-    #                                                     },
-    #                                                     {
-    #                                                         "date": "2018-05-22",
-    #                                                         "total_trips": 4
-    #                                                     }
+        query_string_param1 = 'start=2018-04-30'
+        query_string_param2 = 'end=2019-01-03'
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == {"data":[
+                                                        {
+                                                            "date": "2018-04-30",
+                                                            "total_trips": 4
+                                                        },
+                                                        {
+                                                            "date": "2018-05-22",
+                                                            "total_trips": 4
+                                                        }
                                                         
-    #                                                 ]
-    #                                         }
-    #     assert response.status_code == 200
+                                                    ]
+                                            }
+        assert response.status_code == 200
 
-    # #tests for valid empty result
-    # def test_valid_request_both_dates__not_present(self):
+    #tests for valid empty result
+    def test_valid_request_both_dates__not_present(self):
         
-    #     """Test for valid dates both dates not present in table returns a  200  response."""
+        """Test for valid dates both dates not present in table returns a  200  response."""
         
-    #     query_string_param1 = 'start=2019-04-01'
-    #     query_string_param2 = 'end=2019-01-18'
-    #     response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-    #     assert json.loads(response.data.decode('utf-8')) == {"data":[]}
-    #    assert response.status_code == 200
+        query_string_param1 = 'start=2019-04-01'
+        query_string_param2 = 'end=2019-04-18'
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == {"message": "No records found for the given date range : 2019-04-01 --> 2019-04-18"}
+        assert response.status_code == 404
 
 if __name__ == "__main__":
     unittest.main()
