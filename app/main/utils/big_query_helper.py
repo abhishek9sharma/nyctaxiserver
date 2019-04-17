@@ -29,16 +29,36 @@ class BQConnector:
 
 
 
-    def executequery(self, query, paramdict = None):
-        """Class Method to execute a parameterized query"""
-
-        if paramdict:
-            query_params =self.set_queryparams(paramdict)     
-            job_config = bigquery.QueryJobConfig()
-            job_config.query_parameters = query_params
-            query_results_df = self.client.query(query, job_config=job_config).to_dataframe()
+    def execute_standard_query(self, query, paramdict = None):
+        """Class Method to execute a parameterized query in standard SQL Format"""
         
-        else:
-            query_results_df = self.client.query(query).to_dataframe()
+        try:
+            job_config = bigquery.QueryJobConfig()
+            if paramdict:
+                query_params =self.set_queryparams(paramdict)
+                job_config.query_parameters = query_params
+                query_results_df = self.client.query(query, job_config=job_config).to_dataframe()
+
+            else:
+                query_results_df = self.client.query(query, job_config=job_config).to_dataframe()
+        
+        except Exception as e:
+               raise e
         
         return query_results_df
+
+    def execute_legacy_query(self, query):
+        
+        """Class Method to execute a parameterized query in legacy SQL Format"""
+        try:
+                job_config = bigquery.QueryJobConfig()
+                job_config.use_legacy_sql = True
+                job_config.use_query_cache = True
+                #job_config.allow_large_results = True
+                query_results_df = self.client.query(query, job_config=job_config).to_dataframe()
+                return query_results_df
+        except Exception as e:
+            raise e
+            
+        return query_results_df
+

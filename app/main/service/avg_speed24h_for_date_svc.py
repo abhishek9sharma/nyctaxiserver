@@ -1,4 +1,4 @@
-from app.main.service.baseservice import BaseServiceManager
+from app.main.service.base_svc import BaseServiceManager
 
 class AvgFare24HForDateServiceManager(BaseServiceManager):
 
