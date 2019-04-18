@@ -47,10 +47,10 @@ DATABASE_CONFIG = {
                                 }
                             }
                         },
-
+                        
                         'yourproject': {
                             'databases': {
-                                'yourdatabse': {
+                                'yourdatabase': {
                                     'tables': [
                                         'yourtable1',
                                         'yourtable2'
@@ -67,8 +67,8 @@ DATABASE_CONFIG = {
 
 API_CONFIG = {
                
-               'total_trips'   : {'bqkey':'org', 'dataset': 'bigquery-public-data'},
-               'avg_fare'      : {'bqkey':'org', 'dataset': 'bigquery-public-data'},
-               'avg_speed_24h' : {'bqkey':'org', 'dataset': 'bigquery-public-data'}
-
-            }
+               'total_trips'   : {'bq_key':'gh', 'dataset': 'bigquery-public-data','cache':{'dataset': 'nyctaxiserver-237905', 'tablename':'total_trips_by_date_cache', 'dbname' : 'nyctaxicached_A'}}
+            #    'avg_fare'      : {'bq_key':'org', 'dataset': 'bigquery-public-data', 'cache':{'tablename':'total_fare_by_date_lat_long', 'dbname' : 'nyctaxicached'}},
+            #    'avg_speed_24h' : {'bq_key':'org', 'dataset': 'bigquery-public-data', 'cache':{'tablename':'total_speed_by_date', 'dbname' : 'nyctaxicached   '}}
+               
+             }

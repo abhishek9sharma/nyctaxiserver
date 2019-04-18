@@ -1,34 +1,38 @@
 from app.main.utils.big_query_helper import BQConnector
-from app.configuration.dbconfig import DATABASE_CONFIG, API_CONFIG
+from app.configuration.dbconfig import  API_CONFIG
+from abc import abstractmethod, ABC
 
 
 
-class BaseServiceManager:
+class BaseServiceManager(ABC):
 
     """ Data Access  service to fetch data from data tables """
-    
-    def fetch_records_from_BQ(self, query, dbconfig,  legacy = True, query_params = None,):
+
+    APICONFIG = API_CONFIG
+    cached_tables_dict = {}
+
+    def query_BQ(self, query, api_name,  legacy = True, query_params = None, create_table_in_BQ = False, typedict = {}):
         
-        typedict = {'str':'STRING', 'int':'INTEGER'}
-        
-        connection = BQConnector(dbconfig)
+        connection = BQConnector(api_name)
         if legacy:
-            records = connection.execute_legacy_query(query)
+            records = connection.execute_legacy_query(query, api_name, create_table_in_BQ)
         else:
-            query_param_dict = {}
+            raise ValueError(" standard queries are not supported yet")
+            #records = connection.execute_standard_query(query, api_name, create_table_in_BQ, query_params, typedict)
 
-            if query_params:
-                for pkey in query_params.keys():
-                    paramvalue = query_params[pkey]
-                    paramtype = type(pkey).__name__
-                    query_param_dict[pkey] = {'dtype': typedict[paramtype], 'val': paramvalue}
-            else:
-                query_param_dict = None
-
-            records = connection.execute_standard_query(query, query_param_dict)
         return records
-        
-        
-    def load_config(self):
-         return DATABASE_CONFIG, API_CONFIG
 
+
+    def get_cached_tables(self):
+        return self.cached_tables_dict
+
+    def update_cached_tables(self, table_key, table_val):
+        self.cached_tables_dict[table_key] = table_val
+
+        
+    # def load_config(self):
+    #      return DATABASE_CONFIG, API_CONFIG
+
+    @abstractmethod
+    def get_data(self):
+        pass

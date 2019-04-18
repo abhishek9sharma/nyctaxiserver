@@ -1,5 +1,5 @@
 
-def legacy_query_formatter_from(self, dbconfig, datasetname, databases = [], tables = []):
+def legacy_query_formatter_from(dbconfig, datasetname, databases = [], tables = []):
 
     """Helper method to load the dataset and tables to be queried """
 
