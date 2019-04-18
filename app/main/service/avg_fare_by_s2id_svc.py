@@ -1,6 +1,6 @@
-from app.main.service.base_svc import BaseServiceManager
+from app.main.service.base_svc import BaseSvc
 
-class AvgFareByS2IDServiceManager(BaseServiceManager):
+class AvgFareByS2IDServiceManager(BaseSvc):
 
     def __init__(self):
         self.avg_speed_24hours_for_date = None

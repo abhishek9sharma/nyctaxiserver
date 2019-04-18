@@ -1,6 +1,6 @@
-from app.main.service.base_svc import BaseServiceManager
+from app.main.service.base_svc import BaseSvc
 
-class AvgFare24HForDateServiceManager(BaseServiceManager):
+class AvgFare24HForDateServiceManager(BaseSvc):
 
     def __init__(self):
         self.avg_fare_by_s2id = None

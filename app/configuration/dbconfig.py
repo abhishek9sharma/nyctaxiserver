@@ -11,9 +11,9 @@ DATABASE_CONFIG = {
                     },
 
                     'datasets':{
-                        
+
                         'bigquery-public-data':{
-                            'databases':{
+                            'datasets':{
                                 'new_york_taxi_trips':{
                                     'tables':[
                                         'tlc_green_trips_2014',
@@ -22,24 +22,31 @@ DATABASE_CONFIG = {
                                         #'tlc_green_trips_2017'
                                         #'tlc_yellow_trips_2014',
                                         #'tlc_yellow_trips_2015'
-                                        #'tlc_yellow_trips_2016',                    
-                                    ]
-                                }
-                            }
-                        },
-                        
-                        'nyctaxiserver-237905':{
-                            'databases':{
-                                'nyctaxicached':{
-                                    'tables':[
-                                        'total_trips_by_date'
+                                        #'tlc_yellow_trips_2016',
                                     ]
                                 }
                             }
                         },
 
+                        'nyctaxiserver-237905':{
+                            'datasets':{
+                                'nyctaxicached':{
+                                    'tables':[
+                                        'total_trips_by_date'
+                                    ]
+                                                },
+
+                                'nyctaxicached_new':{
+                                    'tables':[
+                                        'total_trips_by_date'
+                                    ]
+
+                                }
+                            }
+                        },
+
                         'gh2nu-904': {
-                            'databases': {
+                            'datasets': {
                                 'taxiinfo': {
                                     'tables': [
                                         'total_trips_by_date'
@@ -47,19 +54,19 @@ DATABASE_CONFIG = {
                                 }
                             }
                         },
-                        
+
                         'yourproject': {
-                            'databases': {
+                            'datasets': {
                                 'yourdatabase': {
                                     'tables': [
                                         'yourtable1',
                                         'yourtable2'
-                                        
+
                                     ]
                                 }
                             }
                         }
-                    
+
                     }
 
                 }
@@ -67,8 +74,16 @@ DATABASE_CONFIG = {
 
 API_CONFIG = {
                
-               'total_trips'   : {'bq_key':'gh', 'dataset': 'bigquery-public-data','cache':{'dataset': 'nyctaxiserver-237905', 'tablename':'total_trips_by_date_cache', 'dbname' : 'nyctaxicached_A'}}
-            #    'avg_fare'      : {'bq_key':'org', 'dataset': 'bigquery-public-data', 'cache':{'tablename':'total_fare_by_date_lat_long', 'dbname' : 'nyctaxicached'}},
-            #    'avg_speed_24h' : {'bq_key':'org', 'dataset': 'bigquery-public-data', 'cache':{'tablename':'total_speed_by_date', 'dbname' : 'nyctaxicached   '}}
+               'total_trips' : {
+                                'bq_key':'gh', 
+                                'main_data_project': 'bigquery-public-data',
+                                'caching_enabled' : True,
+                                'cache_info':{
+                                               'all_trips_by_date':{ 
+                                                                     'projectname': 'nyctaxiserver-237905', 
+                                                                     'dataset' : 'nyctaxicache3' ,
+                                                                     'table' : 'total_trips_by_date_cache'}
+                                                                    }
+                                            }
                
              }

@@ -1,7 +1,7 @@
 from flask_restplus import Resource, abort
 from flask import request
 from app.main.schema.total_trips_by_date_schema import TotalTripsByDate
-from app.main.service.total_trips_by_date_svc import TotalTripsByDateServiceManager
+from app.main.service.total_trips_by_date_svc import TotalTripsByDateSvc
 #from app.main.service.baseservice import BaseServiceManager
 from app.main.utils.validation_helper import *
 
@@ -9,7 +9,7 @@ from app.main.utils.validation_helper import *
 total_trips_by_date_ns = TotalTripsByDate.ns
 total_trips_by_date_model = TotalTripsByDate.model
 total_trips_by_date_parser = TotalTripsByDate.parser
-total_trips_by_date_svc = TotalTripsByDateServiceManager()
+total_trips_by_date_svc = TotalTripsByDateSvc()
         
 
 @total_trips_by_date_ns.route('/')
