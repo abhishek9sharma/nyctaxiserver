@@ -39,7 +39,7 @@ class AvgFare24HForDateList(Resource):
             abort(400, 'Invalid format for one of the input parameters')
 
 
-        avg_speed_24h_for_date = avg_speed_24h_for_date_svc.get_data(input_date, self.api.app.config.get('BQCONFIGFILE'))
+        avg_speed_24h_for_date = avg_speed_24h_for_date_svc.get_data(input_date)
         #print(avg_speed_24h_for_date_list)
         if avg_speed_24h_for_date:
             return avg_speed_24h_for_date

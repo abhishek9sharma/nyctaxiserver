@@ -106,12 +106,12 @@ API_CONFIG = {
                                 'bq_key':'gh', 
                                 'main_data_project': 'bigquery-public-data',
                                 'datetimeformat' : "%Y-%m-%d",
-                                'caching_enabled' : False,
+                                # 'caching_enabled' : False,
                                 'cache_info':{
-                                               'avg_fare_by_location':{
+                                               'tot_fare_by_date_location':{
                                                                      'projectname': 'nyctaxiserver-237905', 
                                                                      'dataset' : 'nyctaxicache3' ,
-                                                                     'table' : 'fare_location_cache'}
+                                                                     'table' : 'tot_fare_by_date_location_cache'}
                                                                     }
                                             }
  

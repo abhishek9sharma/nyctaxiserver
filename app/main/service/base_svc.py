@@ -76,7 +76,8 @@ class BaseSvc(ABC):
             for dbname, dbinfo in datasetinfo['datasets'].items():
                 if len(datasets)==0 or (dbname in datasets):
                     for tbl in dbinfo['tables']:
-                        if len(tables)==0 or (tbl in tables):
+                        tbl_year = tbl.split('_')[-1]
+                        if len(tables)==0 or (tbl in tables) or (tbl_year in tables):
                             tableliststr = tableliststr + ('[' + apidataset + '.' + dbname +'.' + tbl + '],')
             return tableliststr      
         except:

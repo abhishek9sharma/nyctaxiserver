@@ -1,14 +1,14 @@
 from flask_restplus import Resource, abort
 from flask import request
 from app.main.schema.avg_fare_by_s2id_schema import AvgFareByS2ID
-from app.main.service.avg_fare_by_s2id_svc import AvgFareByS2IDServiceManager
+from app.main.service.avg_fare_by_s2id_svc import AvgFareByS2IDSvc
 from app.main.utils.validation_helper import *
 from app.configuration.dbconfig import API_CONFIG
 
 avg_fare_by_s2id_ns = AvgFareByS2ID.ns
 avg_fare_by_s2id_model = AvgFareByS2ID.model
 avg_fare_by_s2id_parser = AvgFareByS2ID.parser
-avg_fare_by_s2id_svc = AvgFareByS2IDServiceManager()
+avg_fare_by_s2id_svc = AvgFareByS2IDSvc()
         
 
 @avg_fare_by_s2id_ns.route('/')
@@ -37,7 +37,7 @@ class AvgFareByS2IDList(Resource):
             abort(400, 'Invalid format for one of the input parameters')
 
             
-        avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date, self.api.app.config.get('BQCONFIGFILE'))
+        avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date)
         #print(avg_fare_by_s2id_list)
         if avg_fare_by_s2id_list:
             return avg_fare_by_s2id_list

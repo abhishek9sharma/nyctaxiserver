@@ -7,7 +7,7 @@ class AvgFare24HForDateSvc(BaseSvc):
         self.avg_speed_for_date = None
 
     
-    def get_data(self, input_date, dbconfig):
+    def get_data(self, input_date):
         
         """ Gets the average speed for all the trips in the date range --> (input_date-24 hours) to (input_date)  """
 
@@ -43,11 +43,11 @@ class AvgFare24HForDateSvc(BaseSvc):
             #query data from Cache 
             query_total_dist_cache  = """
                                         SELECT 
-                                                (3600 * total_distance/total_trip_time_in_seconds) as average_speed                                                
+                                            (3600 * total_distance/total_trip_time_in_seconds) as average_speed                                                
                                         FROM {0}
                                         where dropoff_DATE>datetime('{1}') and dropoff_DATE<=datetime('{2}')
                                     """.format(query_total_dist_time_table_id, prev_datetime_str, input_date)
-            avg_speed_for_date = self.query_BQ(query_total_dist_cache)
+            avg_speed_for_date_df = self.query_BQ(query_total_dist_cache)
         
         else:
             #query data without caching
@@ -70,9 +70,10 @@ class AvgFare24HForDateSvc(BaseSvc):
                                         and dropoff_DATE <= datetime('{2}')
                                         """.format(main_table_names, prev_datetime_str, input_date)
 
-            avg_speed_for_date = self.query_BQ(query_all_trips_normal)
+            avg_speed_for_date_df = self.query_BQ(query_all_trips_normal)
 
         #default mode is legacy 
-        self.avg_speed_for_date = eval(avg_speed_for_date.to_json(orient ='records'))
+        self.avg_speed_for_date = eval(avg_speed_for_date_df.to_json(orient ='records'))
         return  self.avg_speed_for_date
 
+  
