@@ -1,15 +1,16 @@
 from flask_restplus import Resource, abort
 from flask import request
 from app.main.schema.avg_speed_24h_for_date_schema import AvgFare24HForDate
-from app.main.service.avg_speed24h_for_date_svc import AvgFare24HForDateServiceManager
+from app.main.service.avg_speed24h_for_date_svc import AvgFare24HForDateSvc
 #from app.main.service.baseservice import BaseServiceManager
 from app.main.utils.validation_helper import *
+from app.configuration.dbconfig import API_CONFIG
 
 
 avg_speed_24h_for_date_ns = AvgFare24HForDate.ns
 avg_speed_24h_for_date_model = AvgFare24HForDate.model
 avg_speed_24h_for_date_parser = AvgFare24HForDate.parser
-avg_speed_24h_for_date_svc = AvgFare24HForDateServiceManager()
+avg_speed_24h_for_date_svc = AvgFare24HForDateSvc()
         
 
 @avg_speed_24h_for_date_ns.route('/')
@@ -27,10 +28,17 @@ class AvgFare24HForDateList(Resource):
         query_string_data = avg_speed_24h_for_date_parser.parse_args(request)
         input_date = query_string_data['date']
         
-        if input_date and not(isvaliddate(input_date)):
-            abort(400, 'Invalid format for date parameter having value --> ' + str(input_date) + ', expected format is YYYY-MM-DD')
-            #return {"message":"Invalid format for start parameter value : " + str(input_date) + ", expected format is YYYY-MM-DD","code":400}, 400 
-         
+        api_name = 'avg_speed24h'
+        datetime_format = API_CONFIG[api_name]['datetimeformat'] 
+
+        try:
+            if input_date and not(isvalid_datetime_format(input_date, datetime_format)):
+                abort(400, 'Invalid format for date parameter having value --> ' + str(input_date) + ', expected format is YYYY-MM-DD')
+                #return {"message":"Invalid format for start parameter value : " + str(input_date) + ", expected format is YYYY-MM-DD","code":400}, 400 
+        except Exception as e:
+            abort(400, 'Invalid format for one of the input parameters')
+
+
         avg_speed_24h_for_date = avg_speed_24h_for_date_svc.get_data(input_date, self.api.app.config.get('BQCONFIGFILE'))
         #print(avg_speed_24h_for_date_list)
         if avg_speed_24h_for_date:

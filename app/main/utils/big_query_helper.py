@@ -99,7 +99,7 @@ class BQConnector:
                                 return  False
                     else:
                         raise ValueError("Isssue while creatiing or finding the dataset ", cache_dataset_id)
-                except:
+                except Exception as e:
                     raise ValueError("Message : Issue while creating cache for table {0} in dataset {1}", cache_table_name, cache_dataset_id)
                  
             else:

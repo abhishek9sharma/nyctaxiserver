@@ -1,6 +1,9 @@
 import os
 configdir = os.path.abspath(os.path.dirname(__file__))
 
+datetime_formats = {
+                     'date_only' : "%Y-%m-%d"
+                   }
 DATABASE_CONFIG = {
     
                     'big_query_keys':{
@@ -76,6 +79,7 @@ API_CONFIG = {
                
                'total_trips' : {
                                 'bq_key':'gh', 
+                                'datetimeformat' : "%Y-%m-%d",
                                 'main_data_project': 'bigquery-public-data',
                                 'caching_enabled' : True,
                                 'cache_info':{
@@ -84,6 +88,32 @@ API_CONFIG = {
                                                                      'dataset' : 'nyctaxicache3' ,
                                                                      'table' : 'total_trips_by_date_cache'}
                                                                     }
+                                            },
+               'avg_speed24h' : {
+                                'bq_key':'gh', 
+                                'main_data_project': 'bigquery-public-data',
+                                'datetimeformat' : "%Y-%m-%d",
+                                'caching_enabled' : True,
+                                'cache_info':{
+                                               'total_distance_time_by_ts':{ 
+                                                                     'projectname': 'nyctaxiserver-237905', 
+                                                                     'dataset' : 'nyctaxicache3' ,
+                                                                     'table' : 'total_distance_time_cache'}
+                                                                    }
+                                },
+ 
+               'avg_fare_S2ID' : {
+                                'bq_key':'gh', 
+                                'main_data_project': 'bigquery-public-data',
+                                'datetimeformat' : "%Y-%m-%d",
+                                'caching_enabled' : False,
+                                'cache_info':{
+                                               'avg_fare_by_location':{
+                                                                     'projectname': 'nyctaxiserver-237905', 
+                                                                     'dataset' : 'nyctaxicache3' ,
+                                                                     'table' : 'fare_location_cache'}
+                                                                    }
                                             }
-               
+ 
+
              }

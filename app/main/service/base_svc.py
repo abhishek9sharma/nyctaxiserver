@@ -29,15 +29,18 @@ class BaseSvc(ABC):
         return records
 
     def query_and_cache_if_required(self, query_create_cache, api_name, cache_id):
-        """ Method which execures a query and caches it invoked by a service class related to an end point"""
+        """ Method which executes a query and caches it invoked by a service class related to an end point"""
       
         cache_info = API_CONFIG[api_name]['cache_info'][cache_id]
         cache_info = self.resolve_cache_table_name(cache_info)  
 
-        if cache_info['cache_table_key'] not in self.get_cached_tables():
-            cached_table_status = self.query_BQ(query_create_cache, cache_query_in_BQ = True, cache_info = cache_info)
-            if cached_table_status:
-                self.update_cached_tables(cache_info['cache_table_key'], '['+cache_info['cache_table_key']+'],')
+        try:
+            if cache_info['cache_table_key'] not in self.get_cached_tables():
+                cached_table_status = self.query_BQ(query_create_cache, cache_query_in_BQ = True, cache_info = cache_info)
+                if cached_table_status:
+                    self.update_cached_tables(cache_info['cache_table_key'], '['+cache_info['cache_table_key']+'],')
+        except:
+            return self.get_cached_tables()
 
         return self.get_cached_tables()[cache_info['cache_table_key']]
 
