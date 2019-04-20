@@ -2,12 +2,14 @@ import unittest
 from app import APIServer
 import requests
 import json
-
+import os
 class AvgSpeed24HForDateTestCase(unittest.TestCase):
 
     def setUp(self):
         self.testserver = APIServer('testing')
         self.client = self.testserver.app.test_client
+        self.testdir = os.path.abspath(os.path.dirname(__file__))
+
 
    # tests for dates as invalid dates
     def test_bad_request_date_number(self):
@@ -77,33 +79,91 @@ class AvgSpeed24HForDateTestCase(unittest.TestCase):
         assert response.status_code == 400
 
    
-#    # tests for valid date 
-#     def test_valid_request_date(self):
+   # tests for valid date 
+    def test_valid_request_date_2017_Jan(self):
         
-#         """Test for valid dates returns a  200  response."""
+        """Test for valid dates returns a  200  response."""
         
-#         query_string_param1 = 'date=2017-01-01'
-#         response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
-#         assert json.loads(response.data.decode('utf-8')) == {
-#                                                 "data": [
-#                                                     {
-#                                                     "average_speed": "24.7",
-#                                                     }
-#                                                 ]
-#                                             }
-#         assert response.status_code == 200
+        query_string_param1 = 'date=2017-01-01'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {
+                                                "data": [
+                                                    {
+                                                    "average_speed": 0.7017676092
+                                                    }
+                                                ]
+                                            }
+        assert response.status_code == 200
+
+
+    def test_valid_request_date_2016_Feb(self):
+        
+        """Test for valid dates returns a  200  response."""
+        
+        query_string_param1 = 'date=2016-02-29'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {
+                                                "data": [
+                                                    {
+                                                    "average_speed": 11.7515114652
+                                                    }
+                                                ]
+                                            }
+        assert response.status_code == 200
 
 
 
-#     #tests for valid empty result
-#     def test_valid_request_date__not_present(self):
+    def test_valid_request_date_2015_Aug(self):
         
-#         """Test for valid dates both dates not present in table returns a  200  response."""
+        """Test for valid dates returns a  200  response."""
         
-#         query_string_param1 = 'date=2019-04-01'
-#         response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
-#         assert json.loads(response.data.decode('utf-8')) == {"message": "No records found for the given date: 2019-04-01"}
-#         assert response.status_code == 404
+        query_string_param1 = 'date=2015-08-12'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {
+                                                "data": [
+                                                    {
+                                                    "average_speed": 27.0399171853
+                                                    }
+                                                ]
+                                            }
+        assert response.status_code == 200
+
+
+    def test_valid_request_date_2015_Jan(self):
+        
+        """Test for valid dates returns a  200  response."""
+        
+        query_string_param1 = 'date=2015-01-15'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {
+                                                "data": [
+                                                    {
+                                                    "average_speed": 12.0676661674
+                                                    }
+                                                ]
+                                            }
+        assert response.status_code == 200
+
+
+
+    #tests for valid empty result
+    def test_valid_request_date__not_present(self):
+        
+        """Test for valid dates both dates not present in table returns a  200  response."""
+        
+        query_string_param1 = 'date=2019-04-01'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {"message": "No records found for the given date  : 2019-04-01"}
+        assert response.status_code == 404
+
+    def test_valid_request_date__not_present_2017(self):
+        
+        """Test for valid dates both dates not present in table returns a  200  response."""
+        
+        query_string_param1 = 'date=2017-09-02'
+        response = self.client().get('/average_speed_24hrs/?' +  query_string_param1)
+        assert json.loads(response.data.decode('utf-8')) == {"message": "No records found for the given date  : 2017-09-02"}
+        assert response.status_code == 404
 
 if __name__ == "__main__":
     unittest.main()
