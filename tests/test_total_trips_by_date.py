@@ -2,14 +2,17 @@ import unittest
 from app import APIServer
 import requests
 import json
+import os
 
 class TotaTripsByDateTestCase(unittest.TestCase):
 
     def setUp(self):
         self.testserver = APIServer('testing')
         self.client = self.testserver.app.test_client
+        self.testdir = os.path.abspath(os.path.dirname(__file__))
 
-    #tests for dates as integers
+
+   # tests for dates as integers
     def test_bad_request_start_number(self):
         
         """Test for invalid start date (integer) returns a  400 error response."""
@@ -200,33 +203,114 @@ class TotaTripsByDateTestCase(unittest.TestCase):
                                             }
         assert response.status_code == 200
 
-    #tests for valid start and end date
-    def test_valid_request_both_dates(self):
+   #tests for valid start and end date
+    def test_valid_request_both_dates_2014_Jan_Feb(self):
         
-        """Test for valid dates returns a  200  response."""
+        """est for valid dates for year 2014 Jan Feb returns a  200  response."""
         
-        query_string_param1 = 'start=2017-01-01'
-        query_string_param2 = 'end=2017-01-03'
+        query_string_param1 = 'start=2014-01-30'
+        query_string_param2 = 'end=2014-02-02'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2014_Jan_Feb.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-        assert json.loads(response.data.decode('utf-8')) == {
-                                                "data": [
-                                                    {
-                                                    "date": "2017-01-01",
-                                                    "total_trips": 322201
-                                                    },
-                                                    {
-                                                    "date": "2017-01-02",
-                                                    "total_trips": 249419
-                                                    },
-                                                    {
-                                                    "date": "2017-01-03",
-                                                    "total_trips": 309032
-                                                    }
-                                                ]
-                                            }
+        assert json.loads(response.data.decode('utf-8')) == test_json
+        assert response.status_code == 200
+ 
+    def test_valid_request_both_dates_2016_Feb_Mar(self):
+        
+        """Test for valid dates for year 2016 Feb Mar returns a  200  response."""
+        
+        query_string_param1 = 'start=2016-02-27'
+        query_string_param2 = 'end=2016-03-03'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2016_Feb_Mar.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == test_json
+        assert response.status_code == 200
+ 
+    def test_valid_request_both_dates_2015_March(self):
+        
+        """Test for valid dates for year 2015 March returns a  200  response."""
+        
+        query_string_param1 = 'start=2015-03-04'
+        query_string_param2 = 'end=2015-03-10'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2015_March.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == test_json
+        assert response.status_code == 200
+  
+    
+    def test_valid_request_both_dates_2017_Apr_May(self):
+        
+        """Test for valid dates for year 2017 Apr May returns a  200  response."""
+        
+        query_string_param1 = 'start=2017-04-26'
+        query_string_param2 = 'end=2017-05-01'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2017_Apr_May.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
 
-    #tests for valid start and end date
+
+    def test_valid_request_both_dates_2014_May(self):
+        
+        """Test for valid dates for year 2014 May start returns a  200  response."""
+        
+        query_string_param1 = 'start=2014-05-11'
+        query_string_param2 = 'end=2014-05-15'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2014_May.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == test_json
+        assert response.status_code == 200
+
+
+    def test_valid_request_both_dates_2015_June_Sep(self):
+        
+        """Test for valid dates for year 2015 June Sep start returns a  200  response."""
+        
+        query_string_param1 = 'start=2015-07-21'
+        query_string_param2 = 'end=2015-09-26'
+        test_data_dir_main = 'test_data'
+        test_data_dir_api = 'total_trips'
+        test_datafile = '2015_June_Sep.json'
+        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+        assert json.loads(response.data.decode('utf-8')) == test_json
+        assert response.status_code == 200
+
+
+    
+
+
+        def test_valid_request_both_dates_2016_Oct_2017_Jan(self):
+        
+            """Test for valid dates for year 2014 June July start returns a  200  response."""
+            
+            query_string_param1 = 'start=2016-10-31'
+            query_string_param2 = 'end=2017-01-01'
+            test_data_dir_main = 'test_data'
+            test_data_dir_api = 'total_trips'
+            test_datafile = '2016_Oct_2017_Jan.json'
+            test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+            response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
+            assert json.loads(response.data.decode('utf-8')) == test_json
+            assert response.status_code == 200
+
+
+   #tests for valid start and end date
     def test_valid_request_both_dates_end_date_not_present(self):
         
         """Test for valid dates end date not present in table returns a  200  response."""
