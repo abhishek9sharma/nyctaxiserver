@@ -27,14 +27,21 @@ class AvgFareByS2IDSvc(BaseSvc):
         else:
             #query data without caching
             query_total_fare = """
-                                    SELECT * FROM (
-                                    SELECT
-                                        DATETIME(DATE(pickup_datetime)) as pickup_DATE,
-                                        pickup_latitude, 
-                                        pickup_longitude,
-                                        SUM(fare_amount) as fare
-                                    FROM {0}
-                                    GROUP BY pickup_DATE, pickup_latitude, pickup_longitude)
+                                    SELECT * 
+                                    FROM (
+                                            SELECT
+                                                DATETIME(DATE(pickup_datetime)) as pickup_DATE,
+                                                pickup_latitude, 
+                                                pickup_longitude,
+                                                SUM(fare_amount) as fare
+                                            FROM {0}
+                                            WHERE
+                                                pickup_datetime is not null AND
+                                                pickup_latitude is not null AND 
+                                                pickup_longitude is not null AND
+                                                fare_amount is not null
+                                            GROUP BY pickup_DATE, pickup_latitude, pickup_longitude
+                                         )
                                     WHERE pickup_DATE = datetime('{1}')                                  
                                     """.format(main_table_names, input_date)         
             total_fares_by_date_df = self.query_BQ(query_total_fare)
@@ -50,7 +57,15 @@ class AvgFareByS2IDSvc(BaseSvc):
 
     def get_avg_fare_by_s2id(self, location_fares_df):
         
-        location_fares_df['s2id'] = location_fares_df.apply(lambda x: compute_s2id_sphere_lat_long(x.pickup_latitude, x.pickup_longitude), axis=1)
+        if  platform.system() =='Windows':
+                location_fares_df['s2id'] = location_fares_df.apply(lambda x: compute_s2id_from_lat_long_s2sphere(x.pickup_latitude, x.pickup_longitude), axis=1)
+        else:
+            try:
+                location_fares_df['s2id'] = location_fares_df.apply(lambda x: compute_s2id_from_lat_long_s2google(x.pickup_latitude, x.pickup_longitude), axis=1)
+            except:
+                location_fares_df['s2id'] = location_fares_df.apply(lambda x: compute_s2id_from_lat_long_s2sphere(x.pickup_latitude, x.pickup_longitude), axis=1)
+
+
         fares_df = location_fares_df[['fare','s2id']]
         avg_fares_df = fares_df.groupby('s2id').mean().reset_index()
         return avg_fares_df
