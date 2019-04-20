@@ -1,5 +1,4 @@
 import  os
-#from app.main.utils.big_query_helper import BQConnector
 
 configdir = os.path.abspath(os.path.dirname(__file__))
 
@@ -7,7 +6,8 @@ class BaseConfig(object):
     """A class used to store coniguration properties common across all environments"""
     DEBUG = True
     TESTING = False
-    SERVER_NAME="localhost:8889"
+    PORT = '5000'
+    SERVER_NAME="localhost:" + PORT 
     BQCONFIGFILE = os.path.join(configdir, 'bqconfig.json', )
     ERROR_404_HELP = False
     #BQCONNECTION = BQConnector(BQCONFIGFILE)
