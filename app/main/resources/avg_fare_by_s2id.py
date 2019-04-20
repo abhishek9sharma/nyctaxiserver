@@ -34,9 +34,9 @@ class AvgFareByS2IDList(Resource):
                 abort(400, 'Invalid format for date parameter having value --> ' + str(input_date) + ', expected format is YYYY-MM-DD')
                 #return {"message":"Invalid format for start parameter value : " + str(input_date) + ", expected format is YYYY-MM-DD","code":400}, 400 
         except Exception as e:
-            abort(400, 'Invalid format for one of the input parameters')
+            abort(400, 'Invalid format for date parameter having value --> ' + str(
+                input_date) + ', expected format is YYYY-MM-DD')
 
-            
         avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date)
         #print(avg_fare_by_s2id_list)
         if avg_fare_by_s2id_list:

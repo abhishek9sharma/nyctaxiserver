@@ -27,7 +27,7 @@ def get_datetime_string_in_specified_format(date_obj, format):
     try:
         return date_obj.strftime(format)
     except:
-        raise ValueError(" the date " + str(date_txt + "is not a valid date"))
+        raise ValueError(" the date " + str(date_obj + "is not a valid date"))
 
             
 def get_previous_datetime(input_dateobj, hours_behind = 0):

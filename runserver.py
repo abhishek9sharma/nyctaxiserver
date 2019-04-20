@@ -1,3 +1,3 @@
 from app import APIServer
-server = APIServer('dev')
+server = APIServer('prod')
 server.run()
