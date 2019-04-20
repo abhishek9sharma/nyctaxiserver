@@ -20,12 +20,12 @@ DATABASE_CONFIG = {
                                 'new_york_taxi_trips':{
                                     'tables':[
                                         'tlc_green_trips_2014',
-                                        'tlc_green_trips_2015'
-                                        #'tlc_green_trips_2016',
-                                        #'tlc_green_trips_2017'
-                                        #'tlc_yellow_trips_2014',
-                                        #'tlc_yellow_trips_2015'
-                                        #'tlc_yellow_trips_2016',
+                                        'tlc_green_trips_2015',
+                                         'tlc_green_trips_2016',
+                                         'tlc_green_trips_2017',
+                                         'tlc_yellow_trips_2015',
+                                         'tlc_yellow_trips_2016',
+                                         'tlc_yellow_trips_2017',
                                     ]
                                 }
                             }
@@ -81,6 +81,7 @@ API_CONFIG = {
                                 'bq_key':'gh', 
                                 'datetimeformat' : "%Y-%m-%d",
                                 'main_data_project': 'bigquery-public-data',
+                                'table_filter' : ['2014', '2015', '2016', '2017'],
                                 'caching_enabled' : True,
                                 'cache_info':{
                                                'all_trips_by_date':{ 
@@ -93,6 +94,7 @@ API_CONFIG = {
                                 'bq_key':'gh', 
                                 'main_data_project': 'bigquery-public-data',
                                 'datetimeformat' : "%Y-%m-%d",
+                                'table_filter' : ['2014','2015', '2016'],
                                 'caching_enabled' : True,
                                 'cache_info':{
                                                'total_distance_time_by_ts':{ 
@@ -105,14 +107,15 @@ API_CONFIG = {
                'avg_fare_S2ID' : {
                                 'bq_key':'gh', 
                                 'main_data_project': 'bigquery-public-data',
+                                'table_filter' : ['2014'],
                                 'datetimeformat' : "%Y-%m-%d",
                                 # 'caching_enabled' : False,
-                                'cache_info':{
-                                               'tot_fare_by_date_location':{
-                                                                     'projectname': 'nyctaxiserver-237905', 
-                                                                     'dataset' : 'nyctaxicache3' ,
-                                                                     'table' : 'tot_fare_by_date_location_cache'}
-                                                                    }
+                                # 'cache_info':{
+                                #                'tot_fare_by_date_location':{
+                                #                                      'projectname': 'nyctaxiserver-237905', 
+                                #                                      'dataset' : 'nyctaxicache3' ,
+                                #                                      'table' : 'tot_fare_by_date_location_cache'}
+                                #                                     }
                                             }
  
 

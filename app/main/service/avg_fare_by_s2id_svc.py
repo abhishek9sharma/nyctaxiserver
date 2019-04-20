@@ -13,6 +13,8 @@ class AvgFareByS2IDSvc(BaseSvc):
 
         api_name = 'avg_fare_S2ID'
         date_year = input_date.split('-')[0]
+        table_filter = self.APICONFIG[api_name]['table_filter'] 
+
         
         #creat BQ connection
         self.create_BQ_connection(api_name)
@@ -39,14 +41,14 @@ class AvgFareByS2IDSvc(BaseSvc):
 
         
 
-        avg_fares_by_S2ID_df = self.get_total_fare_by_s2id(total_fares_by_date_df)
+        avg_fares_by_S2ID_df = self.get_avg_fare_by_s2id(total_fares_by_date_df)
         self.avg_fares_by_S2ID = eval(avg_fares_by_S2ID_df.to_json(orient ='records'))
         return self.avg_fares_by_S2ID
 
 
 
 
-    def get_total_fare_by_s2id(self, location_fares_df):
+    def get_avg_fare_by_s2id(self, location_fares_df):
         
         location_fares_df['s2id'] = location_fares_df.apply(lambda x: compute_s2id_sphere_lat_long(x.pickup_latitude, x.pickup_longitude), axis=1)
         fares_df = location_fares_df[['fare','s2id']]

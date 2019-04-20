@@ -1,10 +1,10 @@
 from app.main.utils.big_query_helper import BQConnector
 from app.configuration.dbconfig import  API_CONFIG, DATABASE_CONFIG as DBCONFIG
-from abc import abstractmethod, ABC
+#from abc import abstractmethod, ABC
 
 
 
-class BaseSvc(ABC):
+class BaseSvc:
     """ Base class for Data Access  service to fetch data from data tables """
 
     APICONFIG = API_CONFIG
@@ -78,11 +78,11 @@ class BaseSvc(ABC):
                     for tbl in dbinfo['tables']:
                         tbl_year = tbl.split('_')[-1]
                         if len(tables)==0 or (tbl in tables) or (tbl_year in tables):
-                            tableliststr = tableliststr + ('[' + apidataset + '.' + dbname +'.' + tbl + '],')
+                            tableliststr = tableliststr + ('[' + apidataset + '.' + dbname +'.' + tbl + '],\n')
             return tableliststr      
         except:
             raise ValueError('Exception Occured while formating legacy quuery for attaching tables for dataset ', apidataset)
    
-    @abstractmethod
-    def get_data(self):
-        pass
+    # @abstractmethod
+    # def get_data(self):
+    #     pass

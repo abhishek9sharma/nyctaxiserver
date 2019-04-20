@@ -13,6 +13,8 @@ class AvgFare24HForDateSvc(BaseSvc):
 
         api_name = 'avg_speed24h'
         datetime_format = self.APICONFIG[api_name]['datetimeformat'] 
+        table_filter = self.APICONFIG[api_name]['table_filter'] 
+
         
         #get timestamp 24 hours behind
         input_datetime_obj = get_datetime_in_specified_format(input_date, datetime_format)
@@ -21,13 +23,13 @@ class AvgFare24HForDateSvc(BaseSvc):
   
         #creat BQ connection
         self.create_BQ_connection(api_name)
-        main_table_names = self.legacy_query_formatter_from(api_name, 'main_data_project')
+        main_table_names = self.legacy_query_formatter_from(api_name, 'main_data_project', tables= table_filter)
         usecaching = self.APICONFIG[api_name]['caching_enabled']
         avg_speed_for_date ={'message :': 'Error Occured while quering google big query'}
 
-
+        #IF  date format changes from date to something else the DATE function in below query needs to be update accordingly
         if usecaching:
-            #query data and cache (if date format changes from date to something else the DATE function in below query needs to be update accordingly)
+            #query data and cache 
             query_total_dist_time = """
                                     SELECT  
                                         DATETIME(DATE(dropoff_datetime)) as dropoff_DATE, 
@@ -35,8 +37,13 @@ class AvgFare24HForDateSvc(BaseSvc):
                                         SUM(TIMESTAMP_TO_SEC(TIMESTAMP(dropoff_datetime)) - TIMESTAMP_TO_SEC(TIMESTAMP(pickup_datetime))) as total_trip_time_in_seconds,
                                         count(*) as no_of_trips
                                     FROM {0}
-                                    GROUP BY dropoff_DATE
-                                    
+                                    WHERE
+                                        trip_distance is not null AND 
+                                        dropoff_datetime is not null AND
+                                        pickup_datetime is not null
+                                    GROUP BY 
+                                        dropoff_DATE
+                                                                        
                                     """.format(main_table_names)         
             query_total_dist_time_table_id = self.query_and_cache_if_required(query_total_dist_time, api_name, 'total_distance_time_by_ts')
             
@@ -62,8 +69,12 @@ class AvgFare24HForDateSvc(BaseSvc):
                                                 SUM(TIMESTAMP_TO_SEC(TIMESTAMP(dropoff_datetime)) - TIMESTAMP_TO_SEC(TIMESTAMP(pickup_datetime))) as total_trip_time_in_seconds,
                                                 count(*) as no_of_trips 
                                             FROM {0}
-                                            GROUP BY
-                                                dropoff_date 
+                                            WHERE
+                                                trip_distance is not null AND 
+                                                dropoff_datetime is not null AND
+                                                pickup_datetime is not null
+                                            GROUP BY 
+                                                dropoff_DATE
                                         )
                                         WHERE
                                         dropoff_DATE > datetime('{1}') 
