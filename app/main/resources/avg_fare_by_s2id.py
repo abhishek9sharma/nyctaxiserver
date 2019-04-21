@@ -8,7 +8,6 @@ from app.configuration.dbconfig import API_CONFIG
 avg_fare_by_s2id_ns = AvgFareByS2ID.ns
 avg_fare_by_s2id_model = AvgFareByS2ID.model
 avg_fare_by_s2id_parser = AvgFareByS2ID.parser
-avg_fare_by_s2id_svc = AvgFareByS2IDSvc()
         
 
 @avg_fare_by_s2id_ns.route('/')
@@ -36,7 +35,8 @@ class AvgFareByS2IDList(Resource):
         except Exception as e:
             abort(400, 'Invalid format for date parameter having value --> ' + str(
                 input_date) + ', expected format is YYYY-MM-DD')
-
+        
+        avg_fare_by_s2id_svc = AvgFareByS2IDSvc()
         avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date)
         #print(avg_fare_by_s2id_list)
         if avg_fare_by_s2id_list:

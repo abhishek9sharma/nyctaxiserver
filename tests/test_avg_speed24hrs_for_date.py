@@ -1,8 +1,8 @@
 import unittest
 from app import APIServer
-import requests
 import json
 import os
+
 class AvgSpeed24HForDateTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -11,7 +11,7 @@ class AvgSpeed24HForDateTestCase(unittest.TestCase):
         self.testdir = os.path.abspath(os.path.dirname(__file__))
 
 
-   # tests for dates as invalid dates
+   #tests for dates as invalid dates
     def test_bad_request_date_number(self):
         
         """Test for invalid date (integer) returns a  400 error response."""

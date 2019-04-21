@@ -9,7 +9,6 @@ from app.configuration.dbconfig import API_CONFIG
 total_trips_by_date_ns = TotalTripsByDate.ns
 total_trips_by_date_model = TotalTripsByDate.model
 total_trips_by_date_parser = TotalTripsByDate.parser
-total_trips_by_date_svc = TotalTripsByDateSvc()
         
 
 @total_trips_by_date_ns.route('/')
@@ -46,7 +45,8 @@ class TotaltripsByDateList(Resource):
         except Exception as e:
             abort(400, 'Invalid DATE RANGE, start date : ' + str(start_date) + ' should be less than end date: ' + str(
                 end_date))
-
+        
+        total_trips_by_date_svc = TotalTripsByDateSvc()
         total_trips_by_date_list = total_trips_by_date_svc.get_data(start_date, end_date)
         #print(total_trips_by_date_list)
         if total_trips_by_date_list:

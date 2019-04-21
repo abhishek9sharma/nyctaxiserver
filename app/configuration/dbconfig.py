@@ -59,7 +59,7 @@ API_CONFIG = {
                                 'datetimeformat' : "%Y-%m-%d",
                                 'main_data_project': 'bigquery-public-data',
                                 'table_filter' : ['2014', '2015', '2016', '2017'],
-                                'caching_enabled' : True,
+                                'caching_enabled' : False,
                                 'cache_info':{
                                                'all_trips_by_date':{ 
                                                                      'projectname': SVC_ACCNT_PROJECT_NAME, 
@@ -72,7 +72,7 @@ API_CONFIG = {
                                 'main_data_project': 'bigquery-public-data',
                                 'datetimeformat' : "%Y-%m-%d",
                                 'table_filter' : ['2014','2015', '2016'],
-                                'caching_enabled' : True,
+                                'caching_enabled' : False,
                                 'cache_info':{
                                                'total_distance_time_by_ts':{ 
                                                                             
@@ -83,9 +83,9 @@ API_CONFIG = {
                                 },
  
                'avg_fare_S2ID' : {
-                                'bq_key':'bqconfig', 
+                                'bq_key':'bqconfig',
                                 'main_data_project': 'bigquery-public-data',
-                                'table_filter' : ['2014'],
+                                'table_filter' : ['2014','2015', '2016','2017'],
                                 'datetimeformat' : "%Y-%m-%d",
                                 }
  

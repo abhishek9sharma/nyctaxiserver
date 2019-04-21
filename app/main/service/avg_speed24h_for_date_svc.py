@@ -1,10 +1,14 @@
 from app.main.service.base_svc import BaseSvc
 from app.main.utils.validation_helper import  *
+import os
 
 class AvgFare24HForDateSvc(BaseSvc):
 
     def __init__(self):
         self.avg_speed_for_date = None
+        self.testdir = os.path.abspath(os.path.dirname(__file__))
+
+
 
     
     def get_data(self, input_date):
@@ -33,14 +37,15 @@ class AvgFare24HForDateSvc(BaseSvc):
             query_total_dist_time = """
                                     SELECT  
                                         DATETIME(DATE(dropoff_datetime)) as dropoff_DATE, 
-                                        SUM(trip_distance) as total_distance,
+                                        SUM(float(trip_distance)) as total_distance,
                                         SUM(TIMESTAMP_TO_SEC(TIMESTAMP(dropoff_datetime)) - TIMESTAMP_TO_SEC(TIMESTAMP(pickup_datetime))) as total_trip_time_in_seconds,
                                         count(*) as no_of_trips
                                     FROM {0}
                                     WHERE
                                         trip_distance is not null AND 
                                         dropoff_datetime is not null AND
-                                        pickup_datetime is not null
+                                        pickup_datetime is not null AND
+                                        string(trip_distance) <> 'INVALID'
                                     GROUP BY 
                                         dropoff_DATE
                                                                         
@@ -65,14 +70,15 @@ class AvgFare24HForDateSvc(BaseSvc):
                                         (
                                             SELECT
                                                 DATETIME(DATE(dropoff_datetime)) as dropoff_DATE,
-                                                SUM(trip_distance) as total_distance,
+                                                SUM(float(trip_distance)) as total_distance,
                                                 SUM(TIMESTAMP_TO_SEC(TIMESTAMP(dropoff_datetime)) - TIMESTAMP_TO_SEC(TIMESTAMP(pickup_datetime))) as total_trip_time_in_seconds,
                                                 count(*) as no_of_trips 
                                             FROM {0}
                                             WHERE
                                                 trip_distance is not null AND 
                                                 dropoff_datetime is not null AND
-                                                pickup_datetime is not null
+                                                pickup_datetime is not null AND
+                                                string(trip_distance) <> 'INVALID'
                                             GROUP BY 
                                                 dropoff_DATE
                                         )
@@ -80,7 +86,7 @@ class AvgFare24HForDateSvc(BaseSvc):
                                         dropoff_DATE > datetime('{1}') 
                                         and dropoff_DATE <= datetime('{2}')
                                         """.format(main_table_names, prev_datetime_str, input_date)
-
+            #print(query_all_trips_normal)
             avg_speed_for_date_df = self.query_BQ(query_all_trips_normal)
 
         #default mode is legacy 

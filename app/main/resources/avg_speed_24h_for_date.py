@@ -10,7 +10,6 @@ from app.configuration.dbconfig import API_CONFIG
 avg_speed_24h_for_date_ns = AvgFare24HForDate.ns
 avg_speed_24h_for_date_model = AvgFare24HForDate.model
 avg_speed_24h_for_date_parser = AvgFare24HForDate.parser
-avg_speed_24h_for_date_svc = AvgFare24HForDateSvc()
         
 
 @avg_speed_24h_for_date_ns.route('/')
@@ -39,6 +38,7 @@ class AvgFare24HForDateList(Resource):
             abort(400, 'Invalid format for date parameter having value --> ' + str(
                 input_date) + ', expected format is YYYY-MM-DD')
 
+        avg_speed_24h_for_date_svc = AvgFare24HForDateSvc()
         avg_speed_24h_for_date = avg_speed_24h_for_date_svc.get_data(input_date)
         #print(avg_speed_24h_for_date_list)
         if avg_speed_24h_for_date:

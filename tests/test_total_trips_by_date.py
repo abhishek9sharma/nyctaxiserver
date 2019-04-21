@@ -1,6 +1,5 @@
 import unittest
 from app import APIServer
-import requests
 import json
 import os
 
@@ -213,7 +212,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2014_Jan_Feb.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -227,7 +228,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2016_Feb_Mar.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -241,7 +244,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2015_March.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -256,7 +261,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2017_Apr_May.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -271,7 +278,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2014_May.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -286,7 +295,9 @@ class TotaTripsByDateTestCase(unittest.TestCase):
         test_data_dir_main = 'test_data'
         test_data_dir_api = 'total_trips'
         test_datafile = '2015_June_Sep.json'
-        test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+        test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+        test_json = json.load(test_data_file_resource)         
+        test_data_file_resource.close()
         response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
         assert json.loads(response.data.decode('utf-8')) == test_json
         assert response.status_code == 200
@@ -304,34 +315,15 @@ class TotaTripsByDateTestCase(unittest.TestCase):
             test_data_dir_main = 'test_data'
             test_data_dir_api = 'total_trips'
             test_datafile = '2016_Oct_2017_Jan.json'
-            test_json = json.load(open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile)))
+            test_data_file_resource = open(os.path.join(self.testdir,test_data_dir_main, test_data_dir_api, test_datafile))         
+            test_json = json.load(test_data_file_resource)         
+            test_data_file_resource.close()
             response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
             assert json.loads(response.data.decode('utf-8')) == test_json
             assert response.status_code == 200
 
 
-   #tests for valid start and end date
-    def test_valid_request_both_dates_end_date_not_present(self):
-        
-        """Test for valid dates end date not present in table returns a  200  response."""
-        
-        query_string_param1 = 'start=2018-04-30'
-        query_string_param2 = 'end=2019-01-03'
-        response = self.client().get('/total_trips/?' +  query_string_param1 + '&' + query_string_param2)
-        assert json.loads(response.data.decode('utf-8')) == {"data":[
-                                                        {
-                                                            "date": "2018-04-30",
-                                                            "total_trips": 4
-                                                        },
-                                                        {
-                                                            "date": "2018-05-22",
-                                                            "total_trips": 4
-                                                        }
-                                                        
-                                                    ]
-                                            }
-        assert response.status_code == 200
-
+   
     #tests for valid empty result
     def test_valid_request_both_dates__not_present(self):
         

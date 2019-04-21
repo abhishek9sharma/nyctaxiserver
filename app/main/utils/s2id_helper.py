@@ -1,8 +1,4 @@
 import s2sphere 
-import app.main.utils.S2Lib.pywraps2 as s2google
-
-
-
 
 def compute_s2id_from_lat_long_s2sphere(latitude,longitude, required_level = 16):
 
@@ -20,7 +16,12 @@ def compute_s2id_from_lat_long_s2sphere(latitude,longitude, required_level = 16)
     return curr_cell_ptr.to_token()
 
 
-
+try:
+    import app.main.utils.S2Lib.pywraps2 as s2google
+    print("Successfuly loaded google S2Geometry will be using it for s2id computation")
+except:
+    print("Could not load google S2Geometry will be using s2sphere for s2id computation")
+    
 def compute_s2id_from_lat_long_s2google(latitude, longitude, required_level=16):
     curr_point = s2google.S2LatLng.FromDegrees(latitude, longitude)
     curr_cell = s2google.S2CellId(curr_point)
