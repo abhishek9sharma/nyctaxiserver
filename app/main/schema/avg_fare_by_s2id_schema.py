@@ -2,7 +2,7 @@ from flask_restplus import Namespace, fields, reqparse
 
 class AvgFareByS2ID:
    
-    """ Schema for Average Fare for a S2ID """
+    """ Class to store Schema information for Average Fare for a S2ID """
    
     ns = Namespace('avg_fare_by_s2id', 'Average Fare Per Pick Up Location (S2ID) for Level 16')
     model = ns.model('avg_fare_by_s2id', {

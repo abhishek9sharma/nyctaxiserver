@@ -11,22 +11,20 @@ class TotalTripsByDateSvc(BaseSvc):
         
         """Gets the counts of trips grouped by date based on the provided date range """
 
+        #Load values from configuration
         api_name = 'total_trips'
         table_filter = self.APICONFIG[api_name]['table_filter']
         datetime_format = self.APICONFIG[api_name]['datetimeformat']
+        usecaching = self.APICONFIG[api_name]['caching_enabled']
         if len(table_filter)==0 or datetime_format in [None, '']:
             raise ValueError("Could not find which tables to query for service and or datetime format to use " + self.__class__.__name__)
 
-        #create connection
+        #create connection with big query API and also get table names to be queried
         self.create_BQ_connection(api_name)
-
-
         main_table_names = self.legacy_query_formatter_from(api_name, 'main_data_project', tables= table_filter)
-        usecaching = self.APICONFIG[api_name]['caching_enabled']
-
-        #IF date format changes from date to something else the DATE function in below query needs to be update accordingly
+        
         if usecaching:
-            #query data and cache
+            #create query for fetching data that can be reused, then run and cache it 
             query_all_trips = """
                                 SELECT  
                                     DATETIME(DATE(pickup_datetime)) as pickup_DATE , 
@@ -38,7 +36,7 @@ class TotalTripsByDateSvc(BaseSvc):
                             """.format(main_table_names)
             query_all_trips_cache_table_id = self.query_and_cache_if_required(query_all_trips, api_name, 'all_trips_by_date')
 
-            #query data from Cache
+            #create query for getting final required information from cache and then run it
             query_all_trips_cache  = """
                                         SELECT 
                                             DATE(pickup_DATE) as date,
@@ -50,7 +48,7 @@ class TotalTripsByDateSvc(BaseSvc):
             total_trips_by_date_for_range_df = self.query_BQ(query_all_trips_cache)
 
         else:
-            #query data without caching
+            #create query for fething data directly from big query witout caching, and run the query
             query_all_trips_normal = """
                                         SELECT  
                                             DATE(pickup_datetime) as date, 
@@ -61,9 +59,13 @@ class TotalTripsByDateSvc(BaseSvc):
                                         GROUP by date
                                         ORDER by date
                                     """.format(main_table_names, start_date, end_date)
-
             total_trips_by_date_for_range_df = self.query_BQ(query_all_trips_normal)
 
+        #case where no data found in big query table
+        if total_trips_by_date_for_range_df.size==0:
+            return  self.total_trips_by_date_for_range
+
+        #reformat the data fetched as json and return it to the service handdler
         self.total_trips_by_date_for_range = eval(total_trips_by_date_for_range_df.to_json(orient ='records'))
         return  self.total_trips_by_date_for_range
 

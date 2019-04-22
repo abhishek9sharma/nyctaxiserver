@@ -5,7 +5,11 @@ from app.configuration.dbconfig import  API_CONFIG, DATABASE_CONFIG as DBCONFIG
 
 
 class BaseSvc:
-    """ Base class for Data Access  service to fetch data from data tables """
+    """ 
+        Base class for Data Access  service to fetch data from data tables.
+        Contains various common methods, and also contains information about
+        tables cached by various services
+    """
 
     APICONFIG = API_CONFIG
     cached_tables_dict = {}
@@ -30,7 +34,8 @@ class BaseSvc:
 
     def query_and_cache_if_required(self, query_create_cache, api_name, cache_id):
         """ Method which executes a query and caches it invoked by a service class related to an end point"""
-      
+
+        # get cache name information from config file and then resolve it to create a unique cache key
         cache_info = API_CONFIG[api_name]['cache_info'][cache_id]
         cache_info = self.resolve_cache_table_name(cache_info)  
 
@@ -53,7 +58,11 @@ class BaseSvc:
         self.cached_tables_dict[table_key] = table_val
 
     def resolve_cache_table_name(self, cache_info):
-        #""" Method which resolve the full keyname and big query table name for a table to be cached """"
+        """ 
+            Method which resolve the full keyname and big query table name for a table to be cachhed
+            Should resolve conflicts between caches with same names being used by different services
+        """
+
         class_name = self.__class__.__name__
         project_name = cache_info['projectname']
         dataset_name = cache_info['dataset']
@@ -70,13 +79,17 @@ class BaseSvc:
         try:
             tableliststr = ''
 
+            # extract information from config about datasets related to an API+project combination
             apidataset = API_CONFIG[api_name][project_name]
             datasetinfo = DBCONFIG['datasets'][apidataset]
 
+            # iterate through the datasets related to API+project combination
             for dbname, dbinfo in datasetinfo['datasets'].items():
+                #select all or filter datasets basd on if the input parameter dataset is set
                 if len(datasets)==0 or (dbname in datasets):
                     for tbl in dbinfo['tables']:
                         tbl_year = tbl.split('_')[-1]
+                        #select all or filter datasets basd on if the input parameter dataset is set
                         if len(tables)==0 or (tbl in tables) or (tbl_year in tables):
                             tableliststr = tableliststr + ('[' + apidataset + '.' + dbname +'.' + tbl + '],\n')
             return tableliststr      

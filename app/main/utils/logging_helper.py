@@ -14,6 +14,7 @@ def get_currtime_str():
     
 def set_logger(identifier, logfolder=None):
     """ Returns a logger object """
+    
     if logfolder is None:
         uniqfilename = os.path.join(str(Path(__file__).parents[1]), 'Logs', get_currtime_str() + '_' + identifier)
     else:

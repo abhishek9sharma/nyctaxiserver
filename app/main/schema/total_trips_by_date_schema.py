@@ -1,7 +1,7 @@
 from flask_restplus import Namespace, fields, reqparse
 
 class TotalTripsByDate:
-    """ Schema for Total Trips in a given date range """
+    """  Class to store Schema information for Total Trips in a given date range """
     ns = Namespace('totaltrips_by_date', 'Number of trips per date in a given date range')
     model = ns.model('totaltrips_by_date', {
                                                            'date': fields.Date(required = True, description = 'date'),
