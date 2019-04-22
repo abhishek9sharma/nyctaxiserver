@@ -61,6 +61,9 @@ def endpoint_exception_handler(exception_passed):
                 return int(error_code_from_msg), error_dict['ModelConnectionErrorDB']
             except:
                 return 400, error_dict['ModelConnectionErrorConfigDB']
+        else:
+            return 400, error_dict['ModelConnectionErrorGeneral']
+
     except:
             return 400, error_dict['ModelConnectionErrorGeneral']
 
