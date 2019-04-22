@@ -23,7 +23,7 @@ cp python/_pywraps2.so ../../../app/main/utils/S2Lib/_pywraps2.so
 cd ..
 cd ..
 cd ..
-cd ..
 
 source venvtaxiapi/bin/activate/
+cd ..
 echo "run API server again by typing python runserver.py"

@@ -10,7 +10,7 @@
 
 2. **Virtual Environment Setup** : (Required Only Once. If setup has been completed earlier, please go to Step 3)
 
-    a.   Setup the environment using following commands from bash shell (or command line on windows). You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case `python` command  on your machine points to  *Python 3+* environment, please  replace `python3` with `python` in the `envsetup.sh` file)
+    a.   Setup the environment using following commands from bash shell (or command line on windows). You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case ``python`` command  on your machine points to  *Python 3+* environment, please  replace ``python3`` with ``python`` in the `envsetup.sh` file)
 
             -- Linux (verfied on Ubuntu 16.04.6 LTS):  
                 test@testmachine:~/test/repodir$ cd nyctaxiserver
@@ -21,7 +21,7 @@
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
                                    
    
-    b. (Optional) In case there are isses with running above file you may *install/configure* a virtual environment by running commands from bash shell (or command line as) as follows. (*Note* :In case `python` command  on your machine points to  *Python 3+* environment, replace `python3`  with `python` in below commands)
+    b. (Optional) In case there are isses with running above file you may *install/configure* a virtual environment by running commands from bash shell (or command line as) as follows. (*Note* :In case ``python`` command  on your machine points to  *Python 3+* environment, replace ``python3``  with ``python`` in below commands)
             
             -- Linux (verfied on Ubuntu 16.04.6 LTS) 
                 
@@ -51,15 +51,22 @@
                 "project_id": "ABC:123",
                 ...
 
-    d. Open ```dbonfig.py``` present at location ```test@testmachine:~/test/repodir/nyctaxiserver/app/configuration/``` and set the value of the variable **SVC_ACCNT_PROJECT_NAME** to the value copied in prevous Step 2c. (i.e `"ABC:123"` as based on above example) . Below is an illustration on how the file 
+    d. Open ```dbonfig.py``` present at location ```test@testmachine:~/test/repodir/nyctaxiserver/app/configuration/``` and set the value of the key **SVC_ACCNT_PROJECT_NAME** of dictionary **DATABASE_CONFIG** to the value copied in prevous Step 2c. (i.e `"ABC:123"` as based on above example) . Below is an illustration on how the file 
     ```dbonfig.py``` should look after changes. Save and close ```dbconfig.py``` after making changes.
 
 
-            import os
-            configdir = os.path.abspath(os.path.dirname(__file__))
+            DATABASE_CONFIG = {
+                
+                                'big_query_keys':{
+                                    'bqconfig':os.path.join (configdir,'bqconfig.json'),
+                                    'yourkey':os.path.join (configdir,'enteryourkey.json'),
+                                    
+                                },
+                                'SVC_ACCNT_PROJECT_NAME' : "ABC:123",
+                                ....
+                                ....
 
-            SVC_ACCNT_PROJECT_NAME = "ABC:123"
-
+       
 
 
 4. **Project Configurations** : You may configure following items are per your conbenience (the project should work with default configurations also if no port conflicts are there)
@@ -75,7 +82,7 @@
             PORT = '9000'
 
                            
-    a. **Cache** : In case you do enable caching, open the file ```dbconfig.py``` at location ```test@testmachine:~/test/repodir/nyctaxiserver/app/configuration/``` and set the value of the key variable **caching_enabled** to **True** (present in the dictionary **API_CONFIG**). You may enable caching for a particular API endpoints only (which should supports caching). For example in the below snapshot of file ```dbconfig.py``` caching is enabled for `total_trips` endpoint but not for `avg_speed24h` endpoint. Save and close `the file ```dbconfig.py``` after making changes.
+    a. **Cache** : In case you do enable caching, open the file ```dbconfig.py``` at location ```test@testmachine:~/test/repodir/nyctaxiserver/app/configuration/``` and set the value of the key variable **caching_enabled** to **True** (present in the dictionary **API_CONFIG**). You may enable caching for a particular API endpoints only (which should supports caching). For example in the below snapshot of file ```dbconfig.py``` caching is enabled for ``total_trips`` endpoint but not for ``avg_speed24h`` endpoint. Save and close `the file ```dbconfig.py``` after making changes.
 
 
         API_CONFIG = {
@@ -140,14 +147,14 @@
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$ python runserver.py
 
     
-    -- **Install using offficial documentation** : Build based on steps present at [http://s2geometry.io/about/platforms.html](http://s2geometry.io/about/platforms.html). Then you will need to copy the files `pywraps2.py` and `_pywraps2.so` files from folder ``test@testmachine:~/test/.../s2geometry/build/python/`  to 
-``test@testmachine:~/test/repodir/nyctaxiserver/app/main/utils/S2Lib/$``
+    -- **Install using offficial documentation** : Build based on steps present at [http://s2geometry.io/about/platforms.html](http://s2geometry.io/about/platforms.html). Then you will need to copy the files ``pywraps2.py`` and ``_pywraps2.so`` files from folder ``test@testmachine:~/test/.../s2geometry/build/python$``  to 
+``test@testmachine:~/test/repodir/nyctaxiserver/app/main/utils/S2Lib$``
 
     **P.S**: This library does officia support *Python3+* yet so there even after a local build, there may be issues loading the library.
 
 
 
-7. **Runing Tests**  : In order to execute the testcases run the following command from shell. Before this please make sure to perform Step 2 (configuration) and Step 3 (Virtual Envirobment Set up) if not done already.
+8. **Runing Tests**  : In order to execute the testcases run the following command from shell. Before this please make sure to perform Step 2 (configuration) and Step 3 (Virtual Envirobment Set up) if not done already.
 
         -- Linux (verfied on Ubuntu 16.04.6 LTS):   
             
@@ -156,4 +163,6 @@
             (venvtaxiapi) test@testmachine:~/testdir/repodir$ cd tests
             (venvtaxiapi) test@testmachine:~/testdir/repodir$ pytest
 
-5. Logs ...<TBC>
+9. The execution trace logs are generated in the Folder below
+        
+        -- (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver/app/main/Logs$ 
