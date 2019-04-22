@@ -2,8 +2,8 @@ from flask_restplus import Resource, abort
 from flask import request
 from app.main.schema.total_trips_by_date_schema import TotalTripsByDate
 from app.main.service.total_trips_by_date_svc import TotalTripsByDateSvc
-#from app.main.service.baseservice import BaseServiceManager
 from app.main.utils.validation_helper import *
+from app.main.utils.error_handler import model_exception_handler
 from app.configuration.dbconfig import API_CONFIG
 
 total_trips_by_date_ns = TotalTripsByDate.ns
@@ -18,7 +18,6 @@ class TotaltripsByDateList(Resource):
        start: start date for the provided date range
        end: end date for the provided date range
     """ 
-
     @total_trips_by_date_ns.expect(total_trips_by_date_parser, validate = True)
     @total_trips_by_date_ns.marshal_list_with(total_trips_by_date_model, envelope = 'data')
     def get(self):
@@ -28,8 +27,11 @@ class TotaltripsByDateList(Resource):
         end_date = query_string_data['end']
 
         api_name = 'total_trips'
-        datetime_format = API_CONFIG[api_name]['datetimeformat'] 
-
+        try:
+            datetime_format = API_CONFIG[api_name]['datetimeformat']
+        except Exception as e:
+            error_status, error_message = model_exception_handler(e)
+            abort(int(error_status), error_message)
 
         if start_date and not(isvalid_datetime_format(start_date, datetime_format)):
             abort(400, 'Invalid format for start parameter having value --> ' + str(start_date) + ', expected format is YYYY-MM-DD')
@@ -46,11 +48,15 @@ class TotaltripsByDateList(Resource):
             abort(400, 'Invalid DATE RANGE, start date : ' + str(start_date) + ' should be less than end date: ' + str(
                 end_date))
         
-        total_trips_by_date_svc = TotalTripsByDateSvc()
-        total_trips_by_date_list = total_trips_by_date_svc.get_data(start_date, end_date)
-        #print(total_trips_by_date_list)
-        if total_trips_by_date_list:
-            return total_trips_by_date_list
+        try:
+            total_trips_by_date_svc = TotalTripsByDateSvc()
+            total_trips_by_date_list = total_trips_by_date_svc.get_data(start_date, end_date)
+            if total_trips_by_date_list:
+                return total_trips_by_date_list
+        except Exception as e:
+           error_status, error_message = model_exception_handler(e)
+           abort(int(error_status), error_message)
+
         
         #return {'NotFOund': 'No trips found for the given date range'}, 404 
         abort(404, 'No records found for the given date range : '  + str(start_date) + " --> " + str(end_date))

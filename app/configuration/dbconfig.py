@@ -58,7 +58,7 @@ API_CONFIG = {
                                 'bq_key':'bqconfig', 
                                 'datetimeformat' : "%Y-%m-%d",
                                 'main_data_project': 'bigquery-public-data',
-                                'table_filter' : ['2014', '2015', '2016', '2017'],
+                                'table_filter' : ['2014','2015', '2016', '2017'],
                                 'caching_enabled' : False,
                                 'cache_info':{
                                                'all_trips_by_date':{ 
@@ -85,7 +85,7 @@ API_CONFIG = {
                'avg_fare_S2ID' : {
                                 'bq_key':'bqconfig',
                                 'main_data_project': 'bigquery-public-data',
-                                'table_filter' : ['2014','2015', '2016','2017'],
+                                'table_filter' : ['2014','2015', '2016', '2017'],
                                 'datetimeformat' : "%Y-%m-%d",
                                 }
  

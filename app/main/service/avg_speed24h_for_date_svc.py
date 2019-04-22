@@ -14,17 +14,19 @@ class AvgFare24HForDateSvc(BaseSvc):
     def get_data(self, input_date):
         
         """ Gets the average speed for all the trips in the date range --> (input_date-24 hours) to (input_date)  """
-
         api_name = 'avg_speed24h'
         datetime_format = self.APICONFIG[api_name]['datetimeformat'] 
         table_filter = self.APICONFIG[api_name]['table_filter'] 
+        if len(table_filter)==0 or datetime_format in [None, '']:
+            raise ValueError("Could not find which tables to query for service and or datetime format to use " + self.__class__.__name__)
+
 
         
         #get timestamp 24 hours behind
         input_datetime_obj = get_datetime_in_specified_format(input_date, datetime_format)
         prev_datetime_obj = get_previous_datetime(input_datetime_obj, hours_behind = 24)
         prev_datetime_str = get_datetime_string_in_specified_format(prev_datetime_obj, datetime_format)
-  
+
         #creat BQ connection
         self.create_BQ_connection(api_name)
         main_table_names = self.legacy_query_formatter_from(api_name, 'main_data_project', tables= table_filter)
@@ -88,9 +90,11 @@ class AvgFare24HForDateSvc(BaseSvc):
                                         """.format(main_table_names, prev_datetime_str, input_date)
             #print(query_all_trips_normal)
             avg_speed_for_date_df = self.query_BQ(query_all_trips_normal)
+    
 
-        #default mode is legacy 
+        #default mode is legacy
         self.avg_speed_for_date = eval(avg_speed_for_date_df.to_json(orient ='records'))
         return  self.avg_speed_for_date
 
+     
   

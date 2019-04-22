@@ -15,6 +15,9 @@ class AvgFareByS2IDSvc(BaseSvc):
         api_name = 'avg_fare_S2ID'
         date_year = input_date.split('-')[0]
         table_filter = self.APICONFIG[api_name]['table_filter']
+        if len(table_filter)==0:
+            raise ValueError("Could not find which tables to query for service and or datetime format to use " + self.__class__.__name__)
+
         if date_year not in table_filter:
             return self.avg_fares_by_S2ID
 
@@ -22,8 +25,7 @@ class AvgFareByS2IDSvc(BaseSvc):
         self.create_BQ_connection(api_name)
         main_table_names = self.legacy_query_formatter_from(api_name, 'main_data_project', tables = [date_year])
         usecaching = False
-        avg_speed_for_date = {'message :': 'Error Occured while quering google big query'}
-
+        
         if usecaching:
             raise ValueError ("Caching not enabled for this end points")
         else:

@@ -10,11 +10,9 @@ class BQConnector:
     """ A Class used to represent connection with Biq Query DataBase """
 
     def __init__(self, bq_svc_accnt_file):
-        
         self.credentials = service_account.Credentials.from_service_account_file(bq_svc_accnt_file)
         self.client = bigquery.Client(credentials = self.credentials, project= self.credentials.project_id)
-      
-    
+
 
 
     def verify_dataset(self, dataset_id):

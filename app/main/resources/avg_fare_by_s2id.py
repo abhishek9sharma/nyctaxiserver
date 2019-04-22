@@ -3,6 +3,8 @@ from flask import request
 from app.main.schema.avg_fare_by_s2id_schema import AvgFareByS2ID
 from app.main.service.avg_fare_by_s2id_svc import AvgFareByS2IDSvc
 from app.main.utils.validation_helper import *
+from app.main.utils.error_handler import model_exception_handler
+
 from app.configuration.dbconfig import API_CONFIG
 
 avg_fare_by_s2id_ns = AvgFareByS2ID.ns
@@ -24,9 +26,13 @@ class AvgFareByS2IDList(Resource):
         
         query_string_data = avg_fare_by_s2id_parser.parse_args(request)
         input_date = query_string_data['date']
-        
-        api_name = 'avg_fare_S2ID'
-        datetime_format = API_CONFIG[api_name]['datetimeformat'] 
+
+        try:         
+            api_name = 'avg_fare_S2ID'
+            datetime_format = API_CONFIG[api_name]['datetimeformat'] 
+        except Exception as e:
+           error_status, error_message = model_exception_handler(e)
+           abort(int(error_status), error_message)
 
         try:
             if input_date and not(isvalid_datetime_format(input_date, datetime_format)):
@@ -36,11 +42,15 @@ class AvgFareByS2IDList(Resource):
             abort(400, 'Invalid format for date parameter having value --> ' + str(
                 input_date) + ', expected format is YYYY-MM-DD')
         
-        avg_fare_by_s2id_svc = AvgFareByS2IDSvc()
-        avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date)
-        #print(avg_fare_by_s2id_list)
-        if avg_fare_by_s2id_list:
-            return avg_fare_by_s2id_list
+        try:
+            avg_fare_by_s2id_svc = AvgFareByS2IDSvc()
+            avg_fare_by_s2id_list = avg_fare_by_s2id_svc.get_data(input_date)
+            if avg_fare_by_s2id_list:
+                return avg_fare_by_s2id_list
+        except Exception as e:
+           error_status, error_message = model_exception_handler(e)
+           abort(int(error_status), error_message)
+
         
         #return {'NotFOund': 'No trips found for the given date range'}, 404 
         abort(404, 'No records found for the given date  : '  + str(input_date))

@@ -83,6 +83,3 @@ class BaseSvc:
         except:
             raise ValueError('Exception Occured while formating legacy quuery for attaching tables for dataset ', apidataset)
    
-    # @abstractmethod
-    # def get_data(self):
-    #     pass
