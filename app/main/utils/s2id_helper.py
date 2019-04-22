@@ -3,7 +3,7 @@ import s2sphere
 # The .so file build for S2Geometry does not load sometimes so have put it into a try catch block
 try:
     import app.main.utils.S2Lib.pywraps2 as s2google
-    print("Successfuly loaded google  will be using it for s2id computation")
+    print("Successfuly loaded S2Geometry  will be using it for s2id computation")
 except:
     print("Could not load google S2Geometry will be using s2sphere for s2id computation")
     pass

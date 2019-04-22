@@ -4,24 +4,17 @@
   A python (flask-restplus) based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data.
 
 ## Steps to run
-### All commands may require sudo/admin privileges
-1. *Python 3+* should be installed on the system (the code has been verified on *Python 3.5.2*)
+### In cass you face  issues please run the below commands in sudo/admin privileges
+1. *Python 3.5 or above * should be installed on the system (the code has been verified on *Python 3.5.2*). Following commands may be used if *Python 3.5 or above* is not installed on your machine
 
+                -- Linux (verfied on Ubuntu 16.04.6 LTS):  
+                    test@testmachine:~/test/repodir$ sudo apt-get install python3
+                    test@testmachine:~/test/repodir$ sudo apt-get install python3-pip 
+               
 
 2. **Virtual Environment Setup** : (Required Only Once. If setup has been completed earlier, please go to Step 3)
 
-    a.   Setup the environment using following commands from bash shell (or command line on windows). You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case ``python`` command  on your machine points to  *Python 3+* environment, please  replace ``python3`` with ``python`` in the `envsetup.sh` file)
-
-            -- Linux (verfied on Ubuntu 16.04.6 LTS):  
-                test@testmachine:~/test/repodir$ cd nyctaxiserver
-                test@testmachine:~/test/repodir/nyctaxiserver$ source envsetup.sh
- 
-            You should see the terminal as below after above commands
-                
-                (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
-                                   
-   
-    b. (Optional) In case there are isses with running above file you may *install/configure* a virtual environment by running commands from bash shell (or command line as) as follows. (*Note* :In case ``python`` command  on your machine points to  *Python 3+* environment, replace ``python3``  with ``python`` in below commands)
+        a. You may *install/configure* a virtual environment by running commands from bash shell as follows. (*Note* :In case ``python`` command  on your machine points to  *Python 3+* environment, replace ``python3``  with ``python`` in below commands)
             
             -- Linux (verfied on Ubuntu 16.04.6 LTS) 
                 
@@ -34,10 +27,19 @@
             You should see the terminal as below after above commands
                 
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
-  
-   In case this step is successfull you should see the server running at ['http://localhost:5000/']('http://localhost:5000/') (port number may differ if you changed it in Step 3)
-        
+
+        v.   You may also setup the environment using following commands from bash shell. You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case ``python`` command  on your machine points to  *Python 3+* environment, please  replace ``python3`` with ``python`` in the `envsetup.sh` file)
+
+            -- Linux (verfied on Ubuntu 16.04.6 LTS):  
+                test@testmachine:~/test/repodir$ cd nyctaxiserver
+                test@testmachine:~/test/repodir$ chmod a+x envsetup.sh
+                test@testmachine:~/test/repodir/nyctaxiserver$ source envsetup.sh
  
+            You should see the terminal as below after above commands
+                
+                (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
+         
+
  3. **Google Service Account Configuration** : In case you need to use your own google service account (and not the default which I have provided) follow the below steps else go to Step 3.
 
     a. Login to your google account and follow the steps mentioned at [https://support.google.com/a/answer/7378726?hl=en](https://support.google.com/a/answer/7378726?hl=e).  It will download your service account key information as a  ```.json``` file to your machine
@@ -117,8 +119,6 @@
 
             (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
      
-                    
-   
 
 
 6. **Start Server**
@@ -136,7 +136,9 @@
 
             -- Linux (verfied on Ubuntu 16.04.6 LTS):   
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$ cd makes2idpackage
+                (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver/makes2idpackage$ chmod a+x make_s2python_package.sh
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver/makes2idpackage$ ./make_s2python_package.sh
+                (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver/makes2idpackage$ cd ..
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$ python runserver.py
 
             Please Make sure that  `(venvtaxiapi)` is actcvated in the shell. If not activate it and then run the server. Following should be the sequence then.

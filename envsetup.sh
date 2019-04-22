@@ -2,11 +2,11 @@
 
 
 #create virtual environment
-/usr/bin/python3 -m pip install --user virtualenv
+python3 -m pip install --user virtualenv
 
 
 #install virtual environment
-/usr/bin/python3 -m virtualenv venvtaxiapi 
+python3 -m virtualenv venvtaxiapi 
 
 
 #activate virtual environment
