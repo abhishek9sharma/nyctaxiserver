@@ -42,22 +42,6 @@ class BQConnector:
         
         
 
-    # def delete_if_table_exists(self, table_id, dataset_id, table_fullid):
-    #
-    #     client_tables = [ t.table_id for t in list(self.client.list_tables(dataset_id))]
-    #     if table_id in client_tables:
-    #         self.client.delete_table(table_fullid, not_found_ok=True)
-    #         client_tables = [t.table_id for t in list(self.client.list_tables(dataset_id))]
-    #         print('Previous Cache deleted for tabele ' + table_fullid)
-    #         if table_id not in client_tables:
-    #             return True
-    #         else:
-    #             return False
-    #     else:
-    #         return True
-
-    
-
     def execute_legacy_query(self, query, cache_query_in_BQ_table = False, cache_info = {}):
 
         """Class Method to execute  query in legacy SQL Format in google big query """
