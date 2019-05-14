@@ -4,7 +4,7 @@
   A python (flask-restplus) based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data.
 
 ## Steps to run
-### In cass you face  issues please run the below commands in sudo/admin privileges
+### Preferably, run the below commands with sudo/admin privileges
 1. *Python 3.5 or above and associated pip* should be installed on the system (the code has been verified on *Python 3.5.2*). Following commands may be used if *Python 3.5 or above and associated pip* is not installed on your machine
 
                 -- Linux (verfied on Ubuntu 16.04.6 LTS):  
@@ -14,7 +14,7 @@
 
 2. **Virtual Environment Setup** : (Required Only Once. If setup has been completed earlier, please go to Step 3)
 
-        a. You may *install/configure* a virtual environment by running commands from bash shell as follows. (*Note* :In case ``python`` command  on your machine points to  *Python 3+* environment, replace ``python3``  with ``python`` in below commands)
+      a. You may *install/configure* a virtual environment by running commands from bash shell as follows. (*Note* :In case ``python`` command  on your machine points to  *Python 3+* environment, replace ``python3``  with ``python`` in below commands)
             
             -- Linux (verfied on Ubuntu 16.04.6 LTS) 
                 
@@ -28,18 +28,18 @@
                 
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
 
-        b.   You may also setup the environment using following commands from bash shell. You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case ``python`` command  on your machine points to  *Python 3+* environment, please  replace ``python3`` with ``python`` in the `envsetup.sh` file)
+      b.   You may also setup the environment using following commands from bash shell. You will need navigate (*cd*) to the folder ``nyctaxiserver`` (the one that contains the file *README.md* and folder *app* ) and then run below commands to install and activate the virtual environment in which the API server would run. (*Note* : In case ``python`` command  on your machine points to  *Python 3+* environment, please  replace ``python3`` with ``python`` in the `envsetup.sh` file)
 
             -- Linux (verfied on Ubuntu 16.04.6 LTS):  
                 test@testmachine:~/test/repodir$ cd nyctaxiserver
                 test@testmachine:~/test/repodir$ chmod a+x envsetup.sh
                 test@testmachine:~/test/repodir/nyctaxiserver$ source envsetup.sh
  
-            You should see the terminal as below after above commands
+        You should see the terminal as below after above commands
                 
                 (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
 
-3. **Activate Virtual Environment** : Do this step if conifguration (Step 2)  has already been setup and you want to start the API Server. You may ignore this step if coming from Step 2, as Step 2 should have already started the Server** 
+3. **Activate Virtual Environment** : Do this step if conifguration (Step 2)  has already been setup earlier, and you want to just activate the virtual environment. If you just perfromed Step 2, you may ignore this step if coming from Step 2, as Step 2 should have already activated the environment (venvtaxiapi) 
 
     Navigate (*cd*) to the folder *nyctaxiserver* folder and run the following commands to run the API server
 
@@ -48,7 +48,7 @@
             test@testmachine:~/test/repodir$ cd nyctaxiserver
             test@testmachine:~/test/repodir/nyctaxiserver$ source venvtaxiapi/bin/activate/
         
-        You should see the terminal as below after above commands
+    You should see the terminal as below after above commands
 
             (venvtaxiapi) test@testmachine:~/testdir/repodir/nyctaxiserver$
      
@@ -87,9 +87,9 @@
     -- **Install using offficial documentation** : Build based on steps present at [http://s2geometry.io/about/platforms.html](http://s2geometry.io/about/platforms.html). Then you will need to copy the files ``pywraps2.py`` and ``_pywraps2.so`` files from folder ``test@testmachine:~/test/<somefolderonyourmachine>/s2geometry/build/python$``  to 
 ``test@testmachine:~/test/repodir/nyctaxiserver/app/main/utils/S2Lib$``
 
-    **P.S**: This library does officia support *Python3+* yet so there even after a local build, there may be issues loading the library.
+    **P.S**: This library does not officialy support *Python3+* yet so there even after a local build, there may be issues loading the library.
 
- 6. **Google Service Account Configuration** : In case you need to use your own google service account (and not the default which I have provided) follow the below steps else go to Step 3.
+ 6. **Google Service Account Configuration** : You will need to use your own google service account (I have provided a dummy file [bqconfig.json](https://github.com/abhishek9sharma/nyctaxiserver/blob/master/app/configuration/bqconfig.json) for reference). To create your service account follow the below steps below.
 
     a. Login to your google account and follow the steps mentioned at [https://support.google.com/a/answer/7378726?hl=en](https://support.google.com/a/answer/7378726?hl=e).  It will download your service account key information as a  ```.json``` file to your machine
     
@@ -120,7 +120,7 @@
        
 
 
-7. **Project Configurations** : You may configure following items are per your conbenience (the project should work with default configurations also if no port conflicts are there)
+7. **Project Configurations** : You may configure following items are per your convenience (the project should work with default configurations also if no port conflicts are there)
     
     a. **Port Number** : In case you do not want to use the default port number, open the file ```config.py``` at location ```test@testmachine:~/test/repodir/nyctaxiserver/app/configuration/``` and set the value of the variable **PORT** to the value to the values you desire. Foe example if you want to use the port number 9000 the file ```config.py``` should look like below.  Save and close the file ```config.py``` after making changes.
 

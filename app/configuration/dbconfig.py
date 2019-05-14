@@ -16,7 +16,7 @@ DATABASE_CONFIG = {
                         'yourkey':os.path.join (configdir,'enteryourkey.json'),
                         
                     },
-                    'SVC_ACCNT_PROJECT_NAME' : "premium-carving-90315",
+                    'SVC_ACCNT_PROJECT_NAME' : "ABC:123",
 
                     'datasets':{
 

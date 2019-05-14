@@ -1,12 +1,12 @@
 {
   "type": "service_account",
-  "project_id": "premium-carving-90315",
-  "private_key_id": "24209f9e9553dcb016de0871fedba3dbb10f3533",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXZGF7qOzrBt7E\nkGvbEmW8/yqjcZ4YSu99bNLb8wypt2Z+TZ20uEdlSefCBe/PJ47ePmZpQpMP+hyz\ndxjzW8Lp72FV96ZYQhgM9s4a/5SUHjTKZyLUKS3+iAvvBgh7pazPMnllhUgQFZ76\n+2YEbe5bJ/m1jkl6kGXRTdqz/4qw+6uFeLTPsWXlC/NZw6s5Tf4UTTmN1zGSa6xi\n9Cf/VmjIs6H22Ilq8T/4Zxetr0R5c2Ze7/AH8GqnQ0Oc+fNUf8s9SZtHBPop5zbE\nJrI4Tvl7O6rJzK/+PurdNuAic/gMD8mTArRzWcTaN0UgrSDC8qoP/tECMTeoYKOa\nOr6G59PFAgMBAAECggEAV5XkhA3thSauiFy31wX0o/VYx8yoPnWeTDDnz3PWZt8C\niQKTygyTT69NVBro6KJL2LikGVJujbUlXZ7k4PSj3k+uk3AYTtRVhlQH/HeIWfCs\ng8+LnJ1ALDvzKleYNHtquXhrX+piItQ/6Qw4cD2pipzHUFoTLAkytflEISSdJ5j4\nKqGYYwEZkBvf/BwVhbBgsgVC/Q/CQY47w2uYYsLl7FUFetUq6AoYQyX99sI+Q3We\nz6vJCOYty/cqT7jYJfuwwN2A1yEuJvvIKfqAEuWjjUCD9139MIcNf/Pgl+0EDRnr\nJTRipDG70zWLAI4j4yaUHA5HYtZfoSxVMc5Cf9QFcwKBgQDtYwsPVYSncFwwpr1a\ngfn+F+37ibTrr/ov97iFnmUBUtm+k4VhnKcAVcO9am43ALLEVuWqyVp0O+xkLUv1\nwMV1vSu6TriJGgkExy4HaHmuRle8ITeWpckCL3o4Xq+TKWYtTmhOt37EhG1ruqoH\nehEtPPg9KcyaghOaSFm0/ZI6uwKBgQDoR9jAGFOJs5G51TyGyqC+rxhzC0Jg7EVB\njjXeHbnNQT+JskqB8/wUhTnwJAqoSuh3mRydxzF64eO+rOmrkhsg4JMie5m8L4Gt\nO6Zu2KKcrrhbRGUopyDLBP7yeVF00O4IbD4kHjWnmTmjn0N63wGvXa/uKB33KzDa\nZuNiDn2DfwKBgQDfDrrcvMG6R9UIjhTND+blAH1JZ1sOP7w6CG5ld7F3Le+WqK2j\nS/yMTwpvWKuZmVlhLjn+YddR8uCsPPfsQygH+yo0lTXG9iTVTYeNxHjZ7hUQnLHM\nJ5maKRySDT6zbCorlkpi9P70D291099iySuMs4aaikVMRb+/sA5DCCW4cwKBgBtq\nN2vcsydieUWcpEsoaTZ4RgN2BbyYxkfJeBQiIAbYt54R2/dgi5UEcGUma9eXF77d\n5GG+29ksBgxALkggs3D68IK2YduzI7QFgUw951tkx7+F4AafSyCLE2gc539JFX8K\n/36VzjFcxU/JgVZkMbe38AbE11yPzXFJiXbOTQQTAoGAadq+auBfhr/xu1yUirRF\nAh6ArlS+8yi5UrVCZ3FFiePUj8QihnByvMDls88/izTL+I4mXkVlKiRRMrrDYjKr\nU1XTuGGfRzoZPc9yQmrqzVtnk4A6MmlF8G4axoreFxy9rREVVTHfeZZahskjy+gX\nAIbAM8+0ECLKmwvr0XGtIsU=\n-----END PRIVATE KEY-----\n",
-  "client_email": "nyxtaxitesting@premium-carving-90315.iam.gserviceaccount.com",
-  "client_id": "101262353827894648678",
+  "project_id": "ABC:123",
+  "private_key_id": "......",
+  "private_key":"",
+  "client_email": ".....iam.gserviceaccount.com",
+  "client_id": "12345678",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nyxtaxitesting%40premium-carving-90315.iam.gserviceaccount.com"
+  "client_x509_cert_url": "......iam.gserviceaccount.com"
 }
