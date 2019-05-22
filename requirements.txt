@@ -9,3 +9,4 @@ pandas==0.24.2
 pytest==4.4.1
 pytest_flask==0.14.0
 s2sphere==0.2.5
+gunicorn==19.9.0
