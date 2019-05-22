@@ -104,3 +104,4 @@ venv.bak/
 dummydata
 nyctaxiserver-237905-b3c84f805ff7-gh.json
 nyctaxiserver-21abc2fccec8.json
+bqconfig.json
