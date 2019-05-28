@@ -7,6 +7,6 @@ if __name__ == '__main__':
     app = APIServer('prod')
     app.run()
 else:
-    app = APIServer('prod')
-    app.run()
+    gapp = APIServer('prod')
+    gapp.run()
 
