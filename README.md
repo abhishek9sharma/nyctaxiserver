@@ -1,7 +1,11 @@
 # nyctaxiserver
  
  # Description
-  A python (flask-restplus) based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data.
+  A python ([flask-restplus](https://flask-restplus.readthedocs.io/en/stable/)) based Web API for returning statistics related to trips made by new york taxis based on Google BigQuery Data. A very basic [Data as a Service (DaaS)](https://en.wikipedia.org/wiki/Data_as_a_service) app. A demo has been deployed at [https://nyctaxitripsinfo.herokuapp.com/](https://nyctaxitripsinfo.herokuapp.com/). 
+
+  *On live demo there are currently some issues with endpoints ``avg_fare_by_s2id``  and ``avg_speed_24hrs_for_date``*
+
+
 
 ## Steps to run
 ### Preferably, run the below commands with sudo/admin privileges
