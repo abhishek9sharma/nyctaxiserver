@@ -6,8 +6,6 @@ class BaseConfig(object):
     """A class used to store coniguration properties common across all environments"""
     DEBUG = True
     TESTING = False
-    PORT = '8000'
-    SERVER_NAME="localhost:" + PORT 
     BQCONFIGFILE = os.path.join(configdir, 'bqconfig.json', )
     ERROR_404_HELP = False
     #BQCONNECTION = BQConnector(BQCONFIGFILE)
@@ -16,7 +14,9 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig):
     """A class used to store coniguration properties related to development environment"""
     TESTING = True
-
+    PORT = '5001'
+    SERVER_NAME="localhost:" + PORT 
+    
 
 class TestingConfig(BaseConfig):
     """A class used to store coniguration properties related to staging environment"""
@@ -27,8 +27,6 @@ class TestingConfig(BaseConfig):
 class ProductionConfig(BaseConfig):
     """A class used to store coniguration properties related to production environment"""
     DEBUG = False
-
-
 
 config_by_envkey = dict(
     dev     = DevelopmentConfig,
