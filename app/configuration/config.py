@@ -6,7 +6,7 @@ class BaseConfig(object):
     """A class used to store coniguration properties common across all environments"""
     DEBUG = True
     TESTING = False
-    PORT = '5001'
+    PORT = '8000'
     SERVER_NAME="localhost:" + PORT 
     BQCONFIGFILE = os.path.join(configdir, 'bqconfig.json', )
     ERROR_404_HELP = False
