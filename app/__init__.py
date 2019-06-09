@@ -28,5 +28,8 @@ class APIServer:
     def run(self):
        self.app.run()
 
+    def get_flask_app(self):
+        return self.app
+
 
 

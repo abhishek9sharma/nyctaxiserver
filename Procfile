@@ -1,1 +1,1 @@
-web: gunicorn runserver:gapp
+web: gunicorn prodserver:gapp
