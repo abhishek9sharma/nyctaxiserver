@@ -1,1 +1,1 @@
-web: gunicorn prodserver:gapp
+web: gunicorn -bind localhost:5001 prodserver:gapp
