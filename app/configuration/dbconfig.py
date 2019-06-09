@@ -68,7 +68,7 @@ API_CONFIG = {
                                 'datetimeformat' : "%Y-%m-%d",
                                 'main_data_project': 'bigquery-public-data',
                                 'table_filter' : ['2014','2015', '2016', '2017'],
-                                'caching_enabled' : False,
+                                'caching_enabled' : True,
                                 'cache_info':{
                                                'all_trips_by_date':{ 
                                                                      'projectname': DATABASE_CONFIG['SVC_ACCNT_PROJECT_NAME'], 
@@ -81,7 +81,7 @@ API_CONFIG = {
                                 'main_data_project': 'bigquery-public-data',
                                 'datetimeformat' : "%Y-%m-%d",
                                 'table_filter' : ['2014','2015', '2016'],
-                                'caching_enabled' : False,
+                                'caching_enabled' : True,
                                 'cache_info':{
                                                'total_distance_time_by_ts':{ 
                                                                             

@@ -1,1 +1,1 @@
-web: gunicorn prodserver:gapp
+web: gunicorn --timeout 360 prodserver:gapp
