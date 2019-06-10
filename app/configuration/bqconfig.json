@@ -1,12 +1,12 @@
 {
   "type": "service_account",
-  "project_id": "nyctaxiserver-237905",
-  "private_key_id": "1afaf6f6a3e499ae175ec1d6a0b1a8a671288006",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAX7V7/TuX9cMM\nRk5wCruSa9VJQI5sVTsOr1dlCg3A1Hdq2OHPBoCW36Qqu2rk+Rs9FYBTdFMG19sw\ntJ2j3HrRzauRyKzxrfP9Dpehp02+Aq7Qu4qVUgXT3pnuFZN0lY4w4VcIRTYTK0cd\nmVKaMBdY5pbENdRrDPwsTm1xkpEowOXOv1FKG6VMejCht969veGf8cSS8S9jt1YW\nauQnKQENy5hIeIqJ5yrPMXidZXlOdNJLlBlLlk9vcyy/JA97gBSyaQFiSNlfqcGv\n7oCQhtL9yGdEeQ/q7vKdaHUjrU4gp04RyC5lBdeAJSuj8bvSXOi4wq42quEazZvd\nCkcZGnClAgMBAAECggEAHvTHzYX4ewGPO4BsytbPTEaR8dGzmXc1o61PkPDHOcp2\n1PjFjXzsYFronf++uc3kNjYpikRjv+woV3QZEe8+zFgeTb1PJyzo4EXi3J6BghwI\naYpkSJcEXQ2rE4bhTZdrZC4+xRPuGbOTJA4yHqGygBnLFRPcdMWIJtEQB4CgX0Az\nqZUeCpGdU5C+q7UQ4k1xl/4mRr4uRwGFqqmKi2XYevNrbN3DLxwgSERNDlzlUDnm\na4I6z7ShZ8Lsc2AVC3gkvjt0+deZsg4eqA1W33rwnG/Fc5YDi+oSlab9ASsgLXHN\nG2pZFCKFDEKQfB+/nEUyastq8RvYHw0XIRhO7tY82QKBgQDsifR6A5PvaW11Q2U5\ntjNR814ql3KlHbwsn2Vna/xDiu33wW9BT/ErXTpoUsDk2KNXWv42gP0+Y0xIviz2\njMiXrPtk2zsjhU+5TxkJBBXMWhOpvtSXh+iggGf6bJ+dEiSDepbELMcIyRA1maWi\njDR3DvfXf1bfU28y9oo85HKFWwKBgQDQM4nXuFZ78GYnYSUjwhug+KjPm4zJ8O2A\n2VpSbAezP3tatO9cCtYdohybzk88/vC68Sb94ihny589LnFh9h2t5rEQxXlOgAGP\nDLK7Whm7c6567ZlsDptaz247scIqOL/N6TS0S0lQXwXki7lK16PvvupOFfrjqBLc\n4UU+/9rB/wKBgQCK88OlRaLK2pENeMjnLSxasO+Zb5xOePhI8l4ccigf+WYvy/cy\nU+blxX+BN1PPW6AgufhqRj3+P1DZzrYVI8DWsSyBI/RKuo6J2nhnfnnbsPKqHcs/\nNPyoBKaQSu081SKUBhi5J2DIvWyDQD44DcroQefANTLwQFArjP7KJJ1NzwKBgHyT\nuhD33de/GoDJod1pkfqZjvjaTD2xCYulgmP6/AiHHZpC1U4vtbp5e8DGi6clrIlP\nLlOPdTnWHuwO1A0XpN6fQKeWYWVVNpmPsYpk+SyupWIstTZw7whBQeY6EMIOvsXI\nmp6exblvgikkabScnx0fETez8zExKkg8CqENmqmlAoGAfADFONIg1zkl+Hartuxz\nhcYDl5L+05eFfpPfYDYMVnC8+4ajqxanY8FNvtRbM8bTqXI9WlG4Wi8RjjqnZZUq\nXQjC1ogX6zH0uX89oy9fHK2dbgyaV3ta+azD68TA2yM4ZyVZ1nL6rLnjLVFXczPQ\nir17VKAexzvbHESzNMgYX+Q=\n-----END PRIVATE KEY-----\n",
-  "client_email": "nyctaxiservergithub@nyctaxiserver-237905.iam.gserviceaccount.com",
-  "client_id": "113444249187413143170",
+  "project_id": "ABC:123",
+  "private_key_id": "......",
+  "private_key":"",
+  "client_email": ".....iam.gserviceaccount.com",
+  "client_id": "12345678",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nyctaxiservergithub%40nyctaxiserver-237905.iam.gserviceaccount.com"
+  "client_x509_cert_url": "......iam.gserviceaccount.com"
 }
